@@ -41,7 +41,7 @@ const services = [
   {
     img: food,
     title: 'Food',
-    description: 'From street food to fine dining, explore diverse culinary experiences with special discounts.',
+    description: 'From street food to fine dining, explore diverse culinary experiences  special discounts.',
     color: 'bg-rose-400',
   },
   {
