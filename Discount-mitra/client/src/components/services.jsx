@@ -123,10 +123,10 @@ const ServicesPage = () => {
 
   return (
     <main className="bg-gray-900 min-h-screen text-white px-4 sm:px-6 lg:px-20 py-16 space-y-12">
-      {/* Hero Section */}
+      {/* Hero Section - Added responsiveness for text size and width */}
       <section className="text-center space-y-6">
         <motion.h1
-          className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
+          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -134,7 +134,7 @@ const ServicesPage = () => {
           Discover the Best Deals on Discount Mithra
         </motion.h1>
         <motion.p
-          className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto"
+          className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto px-4" // Increased max-width and added horizontal padding for smaller screens
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
@@ -143,31 +143,34 @@ const ServicesPage = () => {
         </motion.p>
       </section>
 
-      {/* Services Grid */}
+      {/* Services Grid - Adjusted for 3 columns and flexible card height */}
       <section className="text-center">
-        <h2 className="text-2xl font-bold text-blue-400 mb-10 tracking-wider uppercase">
+        <h2 className="text-2xl sm:text-3xl font-bold text-blue-400 mb-10 tracking-wider uppercase">
           Explore Our Services
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"> {/* Set to max 3 columns, added justify-items-center */}
           {services.map((service, idx) => (
             <motion.div
               key={idx}
               whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 180 }}
-              className="flex rounded-2xl shadow-md text-left max-w-md h-40 overflow-hidden bg-gray-800/50 backdrop-blur-md border border-gray-700"
+              // Adjusted card classes: removed fixed h-40 and overflow-hidden, added min-h for flexibility
+              className="flex flex-col sm:flex-row rounded-2xl shadow-md text-left w-full sm:max-w-md min-h-[10rem] bg-gray-800/50 backdrop-blur-md border border-gray-700 mx-auto"
             >
-              <div className="w-2/5 h-full flex-shrink-0">
+              {/* Image section - Flexible width/height based on screen size */}
+              <div className="w-full h-32 sm:h-auto sm:w-2/5 flex-shrink-0">
                 <img
                   src={service.img}
                   alt={service.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-t-2xl sm:rounded-l-2xl sm:rounded-tr-none" // Adjusted border-radius for different layouts
                 />
               </div>
-              <div className="w-3/5 p-4 flex flex-col justify-between">
-                <h3 className="text-lg font-bold text-white">{service.title}</h3>
-                <p className="text-sm text-gray-300">{service.description}</p>
+              {/* Content section - Ensures button is pushed to bottom and visible */}
+              <div className="w-full sm:w-3/5 p-4 flex flex-col justify-between">
+                <h3 className="text-lg font-bold text-white mb-1">{service.title}</h3> {/* Added mb-1 for spacing */}
+                <p className="text-sm text-gray-300 flex-grow mb-2">{service.description}</p> {/* Added flex-grow and mb-2 */}
                 <Button
-                  className="text-blue-400 font-semibold mt-2 px-0 hover:underline text-sm"
+                  className="text-blue-400 font-semibold mt-auto px-0 hover:underline text-sm self-start" // mt-auto pushes to bottom, self-start aligns to left
                   onClick={() => {
                     if (service.title === 'Healthcare ') { 
                       navigate('/hospitals');

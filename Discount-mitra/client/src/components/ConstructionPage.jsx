@@ -66,7 +66,8 @@ const ConstructionPage = () => {
             variants={sectionVariants}
         >
             <motion.h1
-                className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 text-center mb-8"
+                // Made text size responsive for better readability on different screen sizes
+                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 text-center mb-8"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -74,7 +75,9 @@ const ConstructionPage = () => {
                 Construction Services in Sircilla
             </motion.h1>
 
-            <div className="space-y-6">
+            {/* Services Grid - Configured for responsiveness and consistent height */}
+            {/* Using a grid to handle responsive columns and justify-items-center to center cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
                 {constructionServices.map((service) => (
                     <motion.div
                         key={service.id}
@@ -84,40 +87,47 @@ const ConstructionPage = () => {
                             boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)',
                             transition: { duration: 0.3 },
                         }}
-                        className="flex items-center justify-between bg-gray-800/50 backdrop-blur-md border border-gray-700 p-6 rounded-xl shadow-lg h-40 overflow-hidden"
+                        // Card wrapper: Stacks content vertically on small screens, then horizontally on larger ones
+                        // `min-h-[10rem]` allows content to expand, preventing clipping
+                        className="flex flex-col sm:flex-row rounded-xl shadow-lg text-left w-full sm:max-w-md min-h-[10rem] bg-gray-800/50 backdrop-blur-md border border-gray-700 mx-auto"
                     >
-                        <div className="flex items-center gap-5">
+                        {/* Image section: Adapts its dimensions based on screen size */}
+                        {/* `sm:h-full` ensures the image fills the card's height in horizontal layout */}
+                        <div className="w-full h-32 sm:h-full sm:w-2/5 flex-shrink-0">
                             <motion.img
                                 src={service.image}
                                 alt={service.name}
-                                className="w-24 h-24 object-cover rounded-md"
+                                // Adjusted border-radius for seamless look in both stacked and side-by-side layouts
+                                className="w-full h-full object-cover rounded-t-xl sm:rounded-l-xl sm:rounded-tr-none"
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.5 }}
                                 onError={(e) => { e.target.onerror = null; e.target.src = construction; }}
                             />
-                            <div>
-                                <h3 className="font-bold text-xl text-white">{service.name}</h3>
-                                <p className="text-gray-300 text-sm">Location: {service.address}</p>
-
-                                {service.offers && (
-                                    <ul className="text-gray-400 text-xs mt-1 list-disc list-inside">
-                                        {service.offers.map((offer, i) => (
-                                            <li key={i}>{offer}</li>
-                                        ))}
-                                        {service.Phone && <li key="phone">Phone: {service.Phone}</li>}
-                                    </ul>
-                                )}
-                            </div>
                         </div>
+                        {/* Content section: Uses flex properties to arrange text and button */}
+                        <div className="w-full sm:w-3/5 p-4 flex flex-col justify-between">
+                            <h3 className="font-bold text-xl text-white mb-1">{service.name}</h3>
+                            <p className="text-gray-300 text-sm mb-2">Location: {service.address}</p>
 
-                        <motion.button
-                            className="bg-gradient-to-r from-blue-400 to-purple-400 text-white text-sm px-6 py-2 rounded-full hover:scale-105 transition-transform duration-300"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Book Now
-                        </motion.button>
+                            {service.offers && (
+                                // `flex-grow` allows the offers list to take available space, pushing the button down
+                                <ul className="text-gray-400 text-xs mt-1 list-disc list-inside flex-grow">
+                                    {service.offers.map((offer, i) => (
+                                        <li key={i}>{offer}</li>
+                                    ))}
+                                    {service.Phone && <li key="phone">Phone: {service.Phone}</li>}
+                                </ul>
+                            )}
+                            {/* Book Now Button: `mt-auto` pushes it to the bottom, `self-start` aligns it left */}
+                            <motion.button
+                                className="bg-gradient-to-r from-blue-400 to-purple-400 text-white text-sm px-6 py-2 rounded-full hover:scale-105 transition-transform duration-300 mt-auto self-start"
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                Book Now
+                            </motion.button>
+                        </div>
                     </motion.div>
                 ))}
             </div>
