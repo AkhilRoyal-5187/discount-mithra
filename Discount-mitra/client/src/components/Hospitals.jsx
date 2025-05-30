@@ -1,37 +1,34 @@
 // src/components/HospitalCards.jsx
-import React from 'react';
 import { motion } from 'framer-motion';
+import doctor from '../assests/doctor2.jpg';
+
 
 const hospitals = [
   {
     id: 1,
     name: "Lullu Children's Hospital",
-    image:
-      "https://images.unsplash.com/photo-1586771107445-3b3e016b781d?w=300&h=200&fit=crop",
+    image:doctor,
     address: "Gandhi Nagar, Sircilla",
     distance: "2.5 km",
   },
   {
     id: 2,
     name: "Aditya Neuro & Ortho",
-    image:
-      "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=300&h=200&fit=crop",
+    image:doctor,
     address: "Sircilla",
     distance: "5.8 km",
   },
   {
     id: 3,
     name: "Amrutha Hospital",
-    image:
-      "https://images.unsplash.com/photo-1587351022241-1c3547b6a5a0?w=300&h=200&fit=crop",
+    image:doctor,
     address: "Sircilla",
     distance: "10.2 km",
   },
   {
     id: 4,
     name: "Chandana Chest Hospital",
-    image:
-      "https://images.unsplash.com/photo-1587351022241-1c3547b6a5a0?w=300&h=200&fit=crop",
+    image:doctor,
     address: "Sircilla",
     distance: "11.2 km",
   },

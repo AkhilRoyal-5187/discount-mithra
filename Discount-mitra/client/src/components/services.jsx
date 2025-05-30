@@ -1,72 +1,119 @@
 // src/components/ServicesPage.jsx
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
-import doctor from '../assests/doctor2.jpg'
-import education from '../assests/school.jpg'
-import grocery from '../assests/Grocery.webp'
+import doctor from '../assests/doctor2.jpg';
+import education from '../assests/school.jpg';
+import grocery from '../assests/Grocery.webp';
 import food from '../assests/food.jpg';
-import transport from '../assests/images.jpg';
+import carAndBike from '../assests/carAndBike.webp';
 import banking from '../assests/bank.jpg';
 import travels from '../assests/travels.jpg';
 import shopping from '../assests/shopping.jpg';
-import fitness from '../assests/fitness.webp';
-
+import Constructions from '../assests/constructions.png';
+import Bar from '../assests/bar.webp';
+import wine from '../assests/wine.webp';
+import saloon from '../assests/saloon.webp';
+import tailor from '../assests/tailor.webp';
+import laundry from '../assests/laundry.webp';
+import events from '../assests/events.webp';
+import gift from '../assests/gift.webp';
 
 const services = [
   {
     img: doctor,
-    title: 'Healthcare Discounts',
-    description: 'Save big on prescriptions, doctor visits, and wellness services.',
+    title: 'Healthcare ',
+    description: 'Save big on prescriptions, doctor visits, and wellness services for your well-being.',
     color: 'bg-purple-500',
   },
   {
     img: education,
     title: 'Education',
-    description: 'Get assistance and discounts on school fees and supplies.',
+    description: 'Unlock discounts on school fees, supplies, and educational programs.',
     color: 'bg-blue-400',
   },
   {
     img: grocery,
-    title: 'Grocery & Retail Offers',
-    description: 'Enjoy exclusive discounts on your everyday shopping.',
+    title: 'Fresh',
+    description: 'Enjoy exclusive discounts on your everyday grocery shopping and fresh produce.',
     color: 'bg-violet-500',
   },
   {
     img: food,
     title: 'Food',
-    description: 'From street food to fine dining, explore it all with special discounts.',
+    description: 'From street food to fine dining, explore diverse culinary experiences with special discounts.',
     color: 'bg-rose-400',
   },
   {
-    img: transport,
-    title: 'Transport Savings',
-    description: 'Discounts on public and private transportation services.',
+    img: carAndBike,
+    title: 'Car & Bike Care',
+    description: 'Get exclusive deals on vehicle maintenance, repairs, and transportation services.',
     color: 'bg-indigo-500',
   },
   {
     img: banking,
     title: 'Banking',
-    description: 'Get help with loans, credit cards, and more.',
+    description: 'Access special offers on loans, credit cards, and other essential financial services.',
     color: 'bg-blue-500',
   },
   {
-    img:    travels,
+    img: travels,
     title: 'Travels',
-    description: 'Connect with travel dealers and get 10% off.',
+    description: 'Connect with travel dealers and get discounts on hotels, flights, and tour packages.',
     color: 'bg-purple-400',
   },
   {
-    img:    shopping,
+    img: shopping,
     title: 'Shopping',
-    description: 'Explore trending styles and save big with exclusive shopping discounts.',
+    description: 'Explore trending styles and save big with exclusive discounts from your favorite stores.',
     color: 'bg-violet-600',
   },
   {
-    img: fitness,
-    title: 'Fitness & Wellness',
-    description: 'Save on gym memberships, yoga classes, and wellness apps.',
+    img: Constructions,
+    title: 'Construction',
+    description: 'Find special rates on construction materials, home renovations, and building services.',
+    color: 'bg-rose-500',
+  },
+  {
+    img: Bar,
+    title: 'Bar',
+    description: 'Unwind and enjoy great savings on drinks and ambiance at popular bars and lounges.',
+    color: 'bg-rose-500',
+  },
+  {
+    img: wine,
+    title: 'Wine Shop',
+    description: 'Discover discounts on a wide selection of wines and spirits from local shops.',
+    color: 'bg-rose-500',
+  },
+  {
+    img: saloon,
+    title: 'Salon',
+    description: 'Treat yourself to hair, beauty, and grooming services with exclusive salon deals.',
+    color: 'bg-rose-500',
+  },
+  {
+    img: tailor,
+    title: 'Tailor',
+    description: 'Get custom fits and alterations for your clothing at discounted rates from skilled tailors.',
+    color: 'bg-rose-500',
+  },
+  {
+    img: laundry,
+    title: 'Laundry',
+    description: 'Save money with convenient discounts on professional laundry and dry-cleaning ',
+    color: 'bg-rose-500',
+  },
+  {
+    img: events,
+    title: 'Events',
+    description: 'Find exclusive deals on tickets and services for unforgettable events and celebrations.',
+    color: 'bg-rose-500',
+  },
+  {
+    img: gift,
+    title: 'Gift Articles',
+    description: 'Discover unique gift ideas and special discounts on articles for every occasion.',
     color: 'bg-rose-500',
   },
 ];
@@ -122,10 +169,38 @@ const ServicesPage = () => {
                 <Button
                   className="text-blue-400 font-semibold mt-2 px-0 hover:underline text-sm"
                   onClick={() => {
-                    if (service.title === 'Healthcare Discounts') {
+                    if (service.title === 'Healthcare ') { 
                       navigate('/hospitals');
+                    } else if (service.title === 'Education') {
+                      navigate('/education');
+                    } else if (service.title === 'Fresh') { 
+                      navigate('/fresh');
                     } else if (service.title === 'Food') {
                       navigate('/food');
+                    } else if (service.title === 'Car & Bike Care') {
+                      navigate('/car-bike-care');
+                    } else if (service.title === 'Banking') {
+                      navigate('/banking');
+                    } else if (service.title === 'Travels') {
+                      navigate('/travels');
+                    } else if (service.title === 'Shopping') {
+                      navigate('/shopping');
+                    } else if (service.title === 'Construction') {
+                      navigate('/construction'); // Placeholder route
+                    } else if (service.title === 'Bar') {
+                      navigate('/bars'); // Placeholder route
+                    } else if (service.title === 'Wine Shop') {
+                      navigate('/wine-shops'); // Placeholder route
+                    } else if (service.title === 'Salon') {
+                      navigate('/salons'); // Placeholder route
+                    } else if (service.title === 'Tailor') {
+                      navigate('/tailors'); // Placeholder route
+                    } else if (service.title === 'Laundry') {
+                      navigate('/laundry'); // Placeholder route
+                    } else if (service.title === 'Events') {
+                      navigate('/events'); // Placeholder route
+                    } else if (service.title === 'Gift Articles') {
+                      navigate('/gift-articles'); // Placeholder route
                     } else {
                       alert('This service is not available yet.');
                     }
@@ -133,6 +208,7 @@ const ServicesPage = () => {
                 >
                   Explore now →
                 </Button>
+                 
               </div>
             </motion.div>
           ))}
