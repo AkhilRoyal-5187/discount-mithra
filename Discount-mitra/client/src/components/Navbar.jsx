@@ -13,7 +13,7 @@ const NavBar = () => {
           {/* Logo */}
           <div className="flex items-center">
   <Link to="/" className="text-2xl font-bold">
-    <span className="text-blue-400">Discount</span>
+    <span className="text-blue-400">discount</span>
     <span className="text-white-500">mithrA</span>
   </Link>
 </div>
