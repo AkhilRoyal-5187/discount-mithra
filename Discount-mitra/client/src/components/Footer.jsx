@@ -68,9 +68,9 @@ const Footer = () => {
         <div>
           <h4 className="text-white text-lg font-semibold mb-4">Contact Us</h4>
           <address className="not-italic space-y-2 text-sm">
-            <p>Guntur, Andhra Pradesh, India</p>
-            <p>Email: support@discountmithra.com</p>
-            <p>Phone: +91 98765 43210</p>
+            <p>7-108, Shanthi Nagar, Sircilla, 505301, Telangana</p>
+            <p>Email: admin@discountmithra.com</p>
+            <p>Phone: 779966 3223</p>
           </address>
         </div>
       </div>

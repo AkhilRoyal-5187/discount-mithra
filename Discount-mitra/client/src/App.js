@@ -17,6 +17,7 @@ import SalonPage from './components/SalonPage';
 import WineShopPage from './components/WineShopPage';
 import BarPage from './components/BarPage';
 import ConstructionPage from './components/ConstructionPage';
+import LocationsPage from './components/LocationsPage'; 
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
             <Route path ='/wine-shops' element={<WineShopPage/>}/>
             <Route path ='/bars' element={<BarPage/>}/>
             <Route path ='/construction' element={<ConstructionPage/>}/>
+            <Route path="/locations" element={<LocationsPage />} /> {/* ✅ New route */}
+
             {/* Add more routes as needed */}
           </Routes>
         </main>

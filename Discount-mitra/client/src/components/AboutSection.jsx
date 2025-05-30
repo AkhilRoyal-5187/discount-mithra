@@ -36,8 +36,8 @@ const AboutSection = () => {
         variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
       >
         {[
-          { title: 'Our Mission', description: 'Empowering users with unbeatable discounts.', icon: 'M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' },
-          { title: 'Our Vision', description: 'Making savings accessible to everyone.', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+          { title: 'Our Mission', description: 'Providing the best services at the lowest prices, saving families time and money.', icon: 'M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' },
+          { title: 'Our Vision', description: 'To build a society where every family has access to quality services at affordable prices.', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
           { title: 'Our Team', description: 'A passionate group dedicated to your savings.', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
         ].map((item, index) => (
           <motion.div

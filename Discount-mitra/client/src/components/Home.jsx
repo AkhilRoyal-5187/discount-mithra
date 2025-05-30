@@ -316,15 +316,34 @@
 // };
 
 // export default HomePage;
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import elephantImage from '../assests/elephant.png';
-import IconItem from '../components/IconItem';
 import AboutSection from '../components/AboutSection';
 import MembershipSection from '../components/MembershipSection';
 import ContactSection from '../components/ContactSection';
+import { 
+  FaHospital, 
+  FaShoppingBasket, 
+  FaCut, 
+  FaGraduationCap, 
+  FaPlaneDeparture, 
+  FaFilm, 
+  FaDumbbell, 
+  FaGift 
+} from "react-icons/fa";
+import { GiKnifeFork } from "react-icons/gi";
+
+const iconItems = [
+  { bgColor: "bg-red-100", iconColor: "text-red-500", hoverIconColor: "hover:text-red-600", label: "Hospital", Icon: FaHospital },
+  { bgColor: "bg-orange-100", iconColor: "text-orange-500", hoverIconColor: "hover:text-orange-600", label: "Restaurant", Icon: GiKnifeFork },
+  { bgColor: "bg-green-100", iconColor: "text-green-500", hoverIconColor: "hover:text-green-600", label: "Groceries", Icon: FaShoppingBasket },
+  { bgColor: "bg-purple-100", iconColor: "text-purple-500", hoverIconColor: "hover:text-purple-600", label: "Gifts", Icon: FaGift },
+  { bgColor: "bg-pink-100", iconColor: "text-pink-500", hoverIconColor: "hover:text-pink-600", label: "Salon", Icon: FaCut },
+  { bgColor: "bg-yellow-100", iconColor: "text-yellow-600", hoverIconColor: "hover:text-yellow-700", label: "Education", Icon: FaGraduationCap },
+  { bgColor: "bg-blue-100", iconColor: "text-blue-500", hoverIconColor: "hover:text-blue-600", label: "Travel", Icon: FaPlaneDeparture },
+  { bgColor: "bg-indigo-100", iconColor: "text-indigo-500", hoverIconColor: "hover:text-indigo-600", label: "Entertainment", Icon: FaFilm },
+  { bgColor: "bg-teal-100", iconColor: "text-teal-500", hoverIconColor: "hover:text-teal-600", label: "Fitness", Icon: FaDumbbell },
+];
 
 const HomePage = () => {
   const leftVariants = {
@@ -351,7 +370,7 @@ const HomePage = () => {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
-      {/* Hero Section (Unchanged) */}
+      {/* Hero Section */}
       <section className="relative w-full px-4 sm:px-6 lg:px-8 mt-8 mb-12 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-2xl backdrop-blur-lg transition-all duration-500">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20 pointer-events-none"></div>
         <div className="relative max-w-7xl mx-auto py-8 sm:py-12 lg:py-16">
@@ -363,35 +382,36 @@ const HomePage = () => {
               custom={0}
               className="text-center lg:text-left lg:w-1/2 space-y-6"
             >
-              <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
-                <img src={elephantImage} alt="Elephant" className="w-32 sm:w-40 h-auto mx-auto lg:mx-0 object-contain drop-shadow-xl" />
-              </motion.div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-blue-400 font-inter">Welcome to Discount Mithra</h3>
+              <h3 className="text-2xl sm:text-3xl font-bold text-blue-400 font-inter">
+                Welcome to discountmithrA
+              </h3>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                 Your Friendly <br /> <span className="text-white">Discount Companion</span>
               </h2>
-              <p className="text-lg sm:text-xl text-gray-300 font-medium">
-                Save on Hospitals, Restaurants, Groceries, Travel & More!
-              </p>
             </motion.div>
+
             <motion.div
               initial="hidden"
               animate="visible"
               variants={gridVariants}
               className="grid grid-cols-3 sm:grid-cols-4 gap-4 lg:w-1/2 p-6 bg-gray-800/50 rounded-xl shadow-inner backdrop-blur-md border border-gray-700"
             >
-              {[
-                { bgColor: "bg-red-100", iconColor: "text-red-500", hoverIconColor: "hover:text-red-600", label: "Hospital", svgPath: "M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" },
-                { bgColor: "bg-orange-100", iconColor: "text-orange-500", hoverIconColor: "hover:text-orange-600", label: "Restaurant", svgPath: "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" },
-                { bgColor: "bg-green-100", iconColor: "text-green-500", hoverIconColor: "hover:text-green-600", label: "Groceries", svgPath: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" },
-                { bgColor: "bg-purple-100", iconColor: "text-purple-500", hoverIconColor: "hover:text-purple-600", label: "Gifts", svgPath: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
-                { bgColor: "bg-pink-100", iconColor: "text-pink-500", hoverIconColor: "hover:text-pink-600", label: "Salon", svgPath: "M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-2.414-2.414A1 1 0 0015.586 6H12V4a2 2 0 00-2-2H6a2 2 0 00-2 2v16a2 2 0 002 2z" },
-                { bgColor: "bg-yellow-100", iconColor: "text-yellow-600", hoverIconColor: "hover:text-yellow-700", label: "Education", svgPath: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.747 0-3.332.477-4.5 1.253" },
-                { bgColor: "bg-blue-100", iconColor: "text-blue-500", hoverIconColor: "hover:text-blue-600", label: "Travel", svgPath: "M3 10h4l3 7 4-14 3 7h4" },
-                { bgColor: "bg-indigo-100", iconColor: "text-indigo-500", hoverIconColor: "hover:text-indigo-600", label: "Entertainment", svgPath: "M15 10l4.553 2.276a1 1 0 010 1.448L15 16" },
-                { bgColor: "bg-teal-100", iconColor: "text-teal-500", hoverIconColor: "hover:text-teal-600", label: "Fitness", svgPath: "M12 22c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2s-2 .9-2 2v4c0 1.1.9 2 2 2z" }
-              ].map((item, index) => (
-                <IconItem key={index} {...item} variants={iconVariants} />
+              {iconItems.map(({ bgColor, iconColor, hoverIconColor, label, Icon }, index) => (
+                <motion.div
+                  key={index}
+                  variants={iconVariants}
+                  className={`${bgColor} rounded-lg p-4 flex flex-col items-center cursor-pointer shadow-md transition-shadow duration-300`}
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 8px 15px rgba(0,0,0,0.3)",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  }}
+                >
+                  <Icon
+                    className={`w-10 h-10 ${iconColor} ${hoverIconColor} transition-colors duration-300`}
+                  />
+                  <span className="mt-2 text-white font-semibold">{label}</span>
+                </motion.div>
               ))}
             </motion.div>
           </div>

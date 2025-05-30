@@ -65,6 +65,16 @@ const ContactSection = () => {
               />
             </motion.div>
             <motion.div variants={inputVariants}>
+  <label htmlFor="phone" className="block text-sm font-medium text-gray-300">Phone Number</label>
+  <input
+    type="tel"
+    id="phone"
+    className="mt-1 w-full p-4 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
+    placeholder="Your Phone Number"
+  />
+</motion.div>
+
+            <motion.div variants={inputVariants}>
               <label htmlFor="message" className="block text-sm font-medium text-gray-300">Message</label>
               <textarea
                 id="message"
@@ -85,48 +95,53 @@ const ContactSection = () => {
         </motion.div>
 
         {/* Info Cards */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16"
-          initial="hidden"
-          animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+       <motion.div
+  className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16"
+  initial="hidden"
+  animate="visible"
+  variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+>
+  {[
+    {
+      title: 'Email',
+      value: 'admin@discountmithra.com',
+      icon: 'M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z',
+      link: 'mailto:admin@discountmithra.com',
+    },
+    {
+      title: 'Phone',
+      value: '7799663223',
+      icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z',
+      link: 'tel:7799663223',
+    },
+    {
+      title: 'Social',
+      value: 'DiscountMithra',
+      icon: 'M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zM12 8.25a3.75 3.75 0 110 7.5 3.75 3.75 0 010-7.5zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z',
+      link: 'https://www.instagram.com/discountmithra?igsh=MXVuaWV4YXhpYmsyMQ%3D%3D&utm_source=qr',
+    },
+  ].map((item, index) => (
+    <a href={item.link} target="_blank" rel="noopener noreferrer" key={index}>
+      <motion.div
+        variants={cardVariants}
+        whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)" }}
+        className="p-6 bg-gray-800/60 rounded-xl shadow-lg border border-gray-700 backdrop-blur-md hover:border-blue-500 transition-all duration-300"
+      >
+        <svg
+          className="w-10 h-10 text-blue-400 mx-auto mb-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
         >
-          {[
-            {
-              title: 'Email',
-              value: 'support@discountmithra.com',
-              icon: 'M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z',
-            },
-            {
-              title: 'Phone',
-              value: '+1-800-123-4567',
-              icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z',
-            },
-            {
-              title: 'Social',
-              value: '@DiscountMithra',
-              icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z',
-            },
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)" }}
-              className="p-6 bg-gray-800/60 rounded-xl shadow-lg border border-gray-700 backdrop-blur-md hover:border-blue-500 transition-all duration-300"
-            >
-              <svg
-                className="w-10 h-10 text-blue-400 mx-auto mb-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
-              </svg>
-              <h3 className="text-xl font-bold text-white">{item.title}</h3>
-              <p className="mt-2 text-gray-300">{item.value}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
+        </svg>
+        <h3 className="text-xl font-bold text-white">{item.title}</h3>
+        <p className="mt-2 text-gray-300">{item.value}</p>
+      </motion.div>
+    </a>
+  ))}
+</motion.div>
+
       </div>
     </section>
   );

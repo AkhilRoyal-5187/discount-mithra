@@ -12,10 +12,11 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-blue-400">
-              DiscountMithra
-            </Link>
-          </div>
+  <Link to="/" className="text-2xl font-bold">
+    <span className="text-blue-400">Discount</span>
+    <span className="text-white-500">mithrA</span>
+  </Link>
+</div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
@@ -30,7 +31,7 @@ const NavBar = () => {
               Home
             </NavLink>
             <NavLink
-              to="/services"
+              to="/locations"
               className={({ isActive }) =>
                 isActive
                   ? 'text-blue-400 font-semibold'
@@ -87,7 +88,7 @@ const NavBar = () => {
               Home
             </NavLink>
             <NavLink
-              to="/services"
+              to="/locations"
               className={({ isActive }) =>
                 isActive
                   ? 'text-blue-400 font-semibold'

@@ -14,7 +14,7 @@ const MembershipSection = () => {
   };
 
   return (
-    <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center justify-center min-h-screen">
       <motion.div
         initial="hidden"
         animate="visible"
@@ -30,46 +30,42 @@ const MembershipSection = () => {
       </motion.div>
 
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
+        className="mt-12 flex justify-center"
         initial="hidden"
         animate="visible"
         variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
       >
         {[
           {
-            title: 'Basic Plan',
-            price: 'Free',
-            features: ['Access to basic discounts', 'Community support', 'Monthly newsletter'],
-            cta: 'Get Started',
-            link: '/signup',
-          },
-          {
-            title: 'Premium Plan',
-            price: '$9.99/mo',
-            features: ['Exclusive discounts', 'Priority support', 'Early access to deals'],
-            cta: 'Join Now',
-            link: '/signup',
-          },
-          {
-            title: 'Family Plan',
-            price: '$19.99/mo',
-            features: ['All Premium benefits', 'Up to 5 accounts', 'Family-exclusive offers'],
-            cta: 'Join Now',
+            title: 'Join Our Discount Policy',
+            price: '₹999/year',
+            features: ['Save on all services for your family'],
+            cta: 'Subscribe Now',
             link: '/signup',
           },
         ].map((plan, index) => (
           <motion.div
             key={index}
             variants={cardVariants}
-            className="p-6 bg-gray-800/50 rounded-xl shadow-inner border border-gray-700 backdrop-blur-md hover:shadow-xl transition-shadow"
+            className="p-6 bg-gray-800/50 rounded-xl shadow-inner border border-gray-700 backdrop-blur-md hover:shadow-xl transition-shadow w-full max-w-md"
           >
             <h3 className="text-2xl font-bold text-white">{plan.title}</h3>
             <p className="mt-2 text-3xl font-extrabold text-blue-400">{plan.price}</p>
             <ul className="mt-4 space-y-2 text-gray-300">
               {plan.features.map((feature, i) => (
                 <li key={i} className="flex items-center">
-                  <svg className="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-5 h-5 text-green-400 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                   {feature}
                 </li>
