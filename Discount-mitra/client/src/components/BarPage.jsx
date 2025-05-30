@@ -2,6 +2,7 @@
 import React, { useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import bar from '../assests/bar.webp'; 
+import Note from './note';
 
 const barServices = [
     {
@@ -48,6 +49,7 @@ const BarPage = () => {
             >
                 Bars & Restaurants in Sircilla
             </motion.h1>
+            <Note/>
 
             {/* Services Grid - Configured for responsiveness and consistent height */}
             {/* Using a grid to handle responsive columns and justify-items-center to center cards */}

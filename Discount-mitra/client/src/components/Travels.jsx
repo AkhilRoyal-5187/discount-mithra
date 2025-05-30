@@ -1,48 +1,53 @@
-// src/components/FoodCards.jsx
+// src/components/HospitalCards.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import restaurants_img from "../assests/Restaurants.jpg"
+import travel_img from "../assests/travels.jpg";
 import Note from "./note";
 
-const restaurants = [
+const Travel = [
   {
     id: 1,
-    name: "7 Arts Restaurant",
-    image: restaurants_img,
-    address: "Gandhi Nagar, Sircilla",
+    name: "Sircilla Travels",
+    image: travel_img,
+    address: "Old Bus Stand",
 
-    discounts: {
-      d1: " 10% on bill",
-      d2: " Party discounts",
-      d3: "Home deliveryHome delivery",
+    Discounts: {
+      d1: "10% on packages",
+      d2: "5% ticket discount",
+      d3: "Loyalty program",
     },
+    phone: "7799663223",
   },
   {
     id: 2,
-    name: "Ice House",
-    image: restaurants_img,
-    address: "Sircilla",
-    discounts: {
-      d1: "10% on menu",
-      d2: "15% on 1000+Bill",
-     
-    }
+    name: "Holiday Plannerz",
+    image: travel_img,
+    address: "Main Road",
+    distance: "5.8 km",
+    Discounts: {
+      d1: "15% on trips",
+      d2: "Customized packages",
+      d3: "EMI available",
+    },
+    phone: "7799663223",
   },
+
   {
     id: 3,
-    name: "Shankar Pani Puri",
-    image: restaurants_img,
-    address: "Shivalayam, Sircilla",
-     discounts: {
-      d1: "15% bill discount",
-       d2: "20% on 200 bill",
-      d3 : "35% Party catering"
-     
-    }
+    name: "City Cab Services",
+    image: travel_img,
+    address: "Gandhi Nagar",
+    distance: "10.2 km",
+    Discounts: {
+      d1: "10% off",
+      d2: "Round-trip deals",
+      d3: "Free water bottles",
+    },
+    phone: "7799663223",
   },
 ];
 
-const FoodCards = () => {
+const TravelCards = () => {
   // Animation variants
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -71,13 +76,13 @@ const FoodCards = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Food in Sircilla
-      </motion.h1>
-      <Note />
+       Travels in Sircilla
+          </motion.h1>
+          <Note/>
       <div className="space-y-6">
-        {restaurants.map((restaurant) => (
+        {Travel.map((travels) => (
           <motion.div
-            key={restaurant.id}
+            key={travels.id}
             variants={cardVariants}
             whileHover={{
               scale: 1.03,
@@ -89,21 +94,19 @@ const FoodCards = () => {
             {/* Left Section */}
             <div className="flex items-center gap-5">
               <motion.img
-                src={restaurant.image}
-                alt={restaurant.name}
+                src={travels.image}
+                alt={travels.name}
                 className="w-24 h-24 object-cover rounded-md"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               />
               <div>
-                <h3 className="font-bold text-xl text-white">
-                  {restaurant.name}
-                </h3>
-                <p className="text-gray-300 text-sm">{restaurant.address}</p>
+                <h3 className="font-bold text-xl text-white">{travels.name}</h3>
+                <p className="text-gray-300 text-sm">{travels.address}</p>
                 <p className="text-l my-1">Discounts:</p>
                 <ul className="text-gray-400 text-xs mt-1 list-disc pl-4 space-y-1">
-                  {Object.values(restaurant.discounts).map((discount, index) => (
+                  {Object.values(travels.Discounts).map((discount, index) => (
                     <li key={index}>{discount}</li>
                   ))}
                 </ul>
@@ -125,4 +128,4 @@ const FoodCards = () => {
   );
 };
 
-export default FoodCards;
+export default TravelCards;

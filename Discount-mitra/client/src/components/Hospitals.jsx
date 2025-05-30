@@ -1,36 +1,145 @@
 // src/components/HospitalCards.jsx
-import { motion } from 'framer-motion';
-import doctor from '../assests/doctor2.jpg';
-
+import React from "react";
+import { motion } from "framer-motion";
+import hospital from "../assests/doctor.jpg"
+import Note from "./note";
 
 const hospitals = [
   {
     id: 1,
     name: "Lullu Children's Hospital",
-    image:doctor,
+    image: hospital,
     address: "Gandhi Nagar, Sircilla",
-    distance: "2.5 km",
+    Discounts: {
+      d1: "OP🩺 - FREE",
+      d2: "IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 40%",
+      d3: " LAB tests🔬(excluding outsourced) - 20%",
+      d4: "Pharmacy - 10%",
+    },
+    phone: "7799663223",
   },
   {
     id: 2,
     name: "Aditya Neuro & Ortho",
-    image:doctor,
+    image: hospital,
     address: "Sircilla",
     distance: "5.8 km",
+    Discounts: {
+      d1: "OP🩺 - 100 OFF",
+      d2: "Pharmacy - 10%",
+      d3: "IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 20%",
+      d4: "LAB tests🔬(excluding outsourced) - 20%",
+    },
+    phone: "7799663223",
   },
+
   {
     id: 3,
     name: "Amrutha Hospital",
-    image:doctor,
+    image: hospital,
     address: "Sircilla",
     distance: "10.2 km",
+    Discounts: {
+      d1: "OP🩺 - 40%",
+      d2: "Pharmacy - 0%",
+      d3: "IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 40%",
+      d4: "LAB tests🔬(excluding outsourced) - 40%",
+    },
+    phone: "7799663223",
   },
+
   {
     id: 4,
     name: "Chandana Chest Hospital",
-    image:doctor,
+    image: hospital,
     address: "Sircilla",
     distance: "11.2 km",
+    Discounts: {
+      d1: " OP🩺 - 50%",
+      d2: " Pharmacy - 0%",
+      d3: "IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 25%",
+      d4: " LAB tests🔬(excluding outsourced) - 25%",
+    },
+    phone: "7799663223",
+  },
+
+  {
+    id: 5,
+    name: "Sri Siddi Vinayaka E.N.T Hospital",
+    image: hospital,
+    address: "3-2-84/1, Near Old Bus Stand,Sircilla, Rajanna Sircilla, 505301",
+    Discounts: {
+      d1: "  OP🩺 - 100 OFF%",
+      d2: " Pharmacy - 15%",
+      d3: " IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 30%",
+      d4: " LAB tests🔬(excluding outsourced) - 30%",
+    },
+    phone: "7799663223",
+  },
+  {
+    id: 6,
+    name: "Vihaana Multispeciality Dental Care",
+    image: hospital,
+    address:
+      "Karimnagar - Sircilla Rd, near OLD BUS STAND, Shanti Nagar, Sircilla, Telangana 505301",
+    Discounts: {
+      d1: "OP🩺 - FREE",
+      d2: "X-ray🩻 - FREE",
+      d3: "Demtal Care - 25% to 30%",
+      d4: "Laser Flop Surgery(excluding outsourced) - 40%",
+    },
+    phone: "7799663223",
+  },
+  {
+    id: 7,
+    name: "Vinayaka Dental Care -women docter",
+    image: hospital,
+    address:
+      "opposite Collage Ground, in manasa hospital, Sircilla, Telangana 505301",
+    Discounts: {
+      d1: "OP🩺 - FREE",
+      d2: "X-ray🩻 - FREE",
+      d3: "Demtal Care - 25% to 30%",
+      d4: "Laser Flop Surgery(excluding outsourced) - 40%",
+    },
+    phone: "7799663223",
+  },
+
+  {
+    id: 8,
+    name: "ShivaSai Optics",
+    image: hospital,
+    address: "opposite Old Bus Stand, Sircilla, Telangana 505301",
+    Discounts: {
+      d1: "eye check up - FREE",
+      d2: "Glasses - start Just -649",
+      d3: "Branded Glasses - 25% to 30%",
+    },
+    phone: "7799663223",
+  },
+  {
+    id: 9,
+    name: "Laboratory",
+    image: hospital,
+    address: "soon",
+    Discounts: {
+      d1: "Blood Test: - 40%",
+      d2: "Special Tests - 25%",
+      d3: "Packages - 40%",
+    },
+    phone: "7799663223",
+  },
+  {
+    id: 10,
+    name: "Laboratory",
+    image: hospital,
+    address: " Near Old Bus Stand,Sircilla, Rajanna Sircilla, 505301",
+    Discounts: {
+      d1: "Ethical Medicine - 23%",
+      d2: "Personal Care & Hygiene - 10 to 15%",
+      d3: "Medical Devices & Accessories - 20 to 50%",
+    },
+    phone: "7799663223",
   },
 ];
 
@@ -38,7 +147,11 @@ const HospitalCards = () => {
   // Animation variants
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   const cardVariants = {
@@ -61,6 +174,7 @@ const HospitalCards = () => {
       >
         Hospitals in Sircilla
       </motion.h1>
+      <Note/>
       <div className="space-y-6">
         {hospitals.map((hospital) => (
           <motion.div
@@ -68,7 +182,7 @@ const HospitalCards = () => {
             variants={cardVariants}
             whileHover={{
               scale: 1.03,
-              boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)',
+              boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
               transition: { duration: 0.3 },
             }}
             className="flex items-center justify-between bg-gray-800/50 backdrop-blur-md border border-gray-700 p-6 rounded-xl shadow-lg h-40 overflow-hidden"
@@ -84,9 +198,21 @@ const HospitalCards = () => {
                 transition={{ duration: 0.5 }}
               />
               <div>
-                <h3 className="font-bold text-xl text-white">{hospital.name}</h3>
+                <h3 className="font-bold text-xl text-white">
+                  {hospital.name}
+                </h3>
                 <p className="text-gray-300 text-sm">{hospital.address}</p>
-                <p className="text-gray-400 text-xs mt-1">{hospital.distance} away</p>
+                <p className="text-l my-1">Discounts:</p>
+                <ul className="text-gray-400 text-xs mt-1 list-disc pl-4 space-y-1">
+                  {Object.values(hospital.Discounts).map((discount, index) => (
+                    <li key={index}>{discount}</li>
+                  ))}
+                </ul><p className="text-l my-1">Discounts:</p>
+                <ul className="text-gray-400 text-xs mt-1 list-disc pl-4 space-y-1">
+                  {Object.values(hospital.Discounts).map((discount, index) => (
+                    <li key={index}>{discount}</li>
+                  ))}
+                </ul>
               </div>
             </div>
 

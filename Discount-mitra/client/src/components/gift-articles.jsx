@@ -2,6 +2,7 @@
 import React, { useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import gift from '../assests/gift.webp'; // Generic image for gift-related items
+import Note from './note';
 
 // Data specifically for the Gift Cards Page (using the provided event-related details)
 const giftCardsServices = [
@@ -76,7 +77,7 @@ const GiftCardsPage = () => {
             >
                 Gift Cards / Articles in Sircilla
             </motion.h1>
-
+            <Note/>
             {/* Grid for services - Adjusted for responsiveness like ConstructionPage */}
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
                 {giftCardsServices.map((service) => (

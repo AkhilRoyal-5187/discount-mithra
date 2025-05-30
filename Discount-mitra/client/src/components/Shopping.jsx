@@ -1,48 +1,50 @@
-// src/components/FoodCards.jsx
+// src/components/HospitalCards.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import restaurants_img from "../assests/Restaurants.jpg"
+import shopping_img from "../assests/shopping.jpg";
 import Note from "./note";
 
-const restaurants = [
+const Shopping = [
   {
     id: 1,
-    name: "7 Arts Restaurant",
-    image: restaurants_img,
-    address: "Gandhi Nagar, Sircilla",
-
-    discounts: {
-      d1: " 10% on bill",
-      d2: " Party discounts",
-      d3: "Home deliveryHome delivery",
+    name: "Vishala Shopping Mall",
+    image: shopping_img,
+    address: "Near Gandi chowk",
+    Discounts: {
+      d1: "5% OFF on Bill",
+      d2: "10% OFF on Pattu Sarees",
+      d3: "Festival deals",
     },
+    phone: "7799663223",
   },
   {
     id: 2,
-    name: "Ice House",
-    image: restaurants_img,
-    address: "Sircilla",
-    discounts: {
-      d1: "10% on menu",
-      d2: "15% on 1000+Bill",
-     
-    }
+    name: "Reliance Trends",
+    image: shopping_img,
+    address: " Near Old Bus stand",
+    distance: "5.8 km",
+    Discounts: {
+      d1: "7% discount on Cash Vochers",
+      d2: "Online Discount Coupons",
+    },
+    phone: "7799663223",
   },
+
   {
     id: 3,
-    name: "Shankar Pani Puri",
-    image: restaurants_img,
-    address: "Shivalayam, Sircilla",
-     discounts: {
-      d1: "15% bill discount",
-       d2: "20% on 200 bill",
-      d3 : "35% Party catering"
-     
-    }
+    name: "MAX Fashion Online",
+    image: shopping_img,
+    address: "Gandhi Nagar",
+    distance: "10.2 km",
+    Discounts: {
+      d1: "10% discount on E-Cash Vochers",
+      d2: "Online Discount Coupons",
+    },
+    phone: "7799663223",
   },
 ];
 
-const FoodCards = () => {
+const ShoppingCards = () => {
   // Animation variants
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -71,13 +73,13 @@ const FoodCards = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Food in Sircilla
-      </motion.h1>
-      <Note />
+        Shopping Malls in Sircilla
+          </motion.h1>
+          <Note/>
       <div className="space-y-6">
-        {restaurants.map((restaurant) => (
+        {Shopping.map((shops) => (
           <motion.div
-            key={restaurant.id}
+            key={shops.id}
             variants={cardVariants}
             whileHover={{
               scale: 1.03,
@@ -89,21 +91,19 @@ const FoodCards = () => {
             {/* Left Section */}
             <div className="flex items-center gap-5">
               <motion.img
-                src={restaurant.image}
-                alt={restaurant.name}
+                src={shops.image}
+                alt={shops.name}
                 className="w-24 h-24 object-cover rounded-md"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               />
               <div>
-                <h3 className="font-bold text-xl text-white">
-                  {restaurant.name}
-                </h3>
-                <p className="text-gray-300 text-sm">{restaurant.address}</p>
+                <h3 className="font-bold text-xl text-white">{shops.name}</h3>
+                <p className="text-gray-300 text-sm">{shops.address}</p>
                 <p className="text-l my-1">Discounts:</p>
                 <ul className="text-gray-400 text-xs mt-1 list-disc pl-4 space-y-1">
-                  {Object.values(restaurant.discounts).map((discount, index) => (
+                  {Object.values(shops.Discounts).map((discount, index) => (
                     <li key={index}>{discount}</li>
                   ))}
                 </ul>
@@ -125,4 +125,4 @@ const FoodCards = () => {
   );
 };
 
-export default FoodCards;
+export default ShoppingCards;

@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import saloon from '../assests/saloon.webp';
+import Note from './note';
 
 const salonServices = [
     {
@@ -59,6 +60,7 @@ const SalonPage = () => {
             >
                 Salon Services in Sircilla
             </motion.h1>
+            <Note/>
 
             {/* Services Grid - Configured for responsiveness and consistent height */}
             {/* Added grid for responsive columns and justify-items-center for centering */}

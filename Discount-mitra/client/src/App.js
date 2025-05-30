@@ -18,6 +18,12 @@ import WineShopPage from './components/WineShopPage';
 import BarPage from './components/BarPage';
 import ConstructionPage from './components/ConstructionPage';
 import LocationsPage from './components/LocationsPage'; 
+import EducationCards from './components/Education';
+import FreshCards from './components/Fresh';
+import CarServiceCards from './components/Car_Bike';
+import BankingCards from './components/Banking.';
+import TravelCards from './components/Travels';
+import ShoppingCards from './components/Shopping';
 
 function App() {
   return (
@@ -45,8 +51,13 @@ function App() {
             <Route path ='/wine-shops' element={<WineShopPage/>}/>
             <Route path ='/bars' element={<BarPage/>}/>
             <Route path ='/construction' element={<ConstructionPage/>}/>
-            <Route path="/locations" element={<LocationsPage />} /> {/* ✅ New route */}
-
+            <Route path="/locations" element={<LocationsPage />} />
+            <Route path="/education" element={<EducationCards />} />
+            <Route path="/fresh" element={<FreshCards />} />
+            <Route path="/car-bike-care" element={<CarServiceCards />} />
+            <Route path="/banking" element={<BankingCards />} />
+            <Route path="/travels" element={<TravelCards />} />
+            <Route path="/shopping" element={<ShoppingCards/>} />
             {/* Add more routes as needed */}
           </Routes>
         </main>

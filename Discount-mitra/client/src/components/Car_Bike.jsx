@@ -1,48 +1,78 @@
-// src/components/FoodCards.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import restaurants_img from "../assests/Restaurants.jpg"
+import carService_img from "../assests/car_repair.avif";
 import Note from "./note";
-
-const restaurants = [
+const CarServices = [
   {
     id: 1,
-    name: "7 Arts Restaurant",
-    image: restaurants_img,
-    address: "Gandhi Nagar, Sircilla",
+    name: "Car Repair Pro",
+    image: carService_img,
+    location: "Old Petrol Bunk",
 
-    discounts: {
-      d1: " 10% on bill",
-      d2: " Party discounts",
-      d3: "Home deliveryHome delivery",
+    Discounts: {
+      d1: "20% on labor",
+      d2: "10% on spares",
+      d3: "10% on packages",
     },
+    phone: "7799663223",
   },
   {
     id: 2,
-    name: "Ice House",
-    image: restaurants_img,
-    address: "Sircilla",
-    discounts: {
-      d1: "10% on menu",
-      d2: "15% on 1000+Bill",
-     
-    }
+    name: "Bike Repair Hub",
+    image: carService_img,
+    location: " Near College",
+
+    Discounts: {
+      d1: "Free checkup",
+      d2: " Labor charge - 15%",
+      d3: "Parts discount - 10%",
+    },
+    phone: "7799663223",
   },
   {
     id: 3,
-    name: "Shankar Pani Puri",
-    image: restaurants_img,
-    address: "Shivalayam, Sircilla",
-     discounts: {
-      d1: "15% bill discount",
-       d2: "20% on 200 bill",
-      d3 : "35% Party catering"
-     
-    }
+    name: "Vasavi Auto Mobiles",
+    image: carService_img,
+    location: "Karimnagar Road",
+    Discounts: {
+      d1: "Up to 20% off",
+    },
+    phone: "7799663223",
+  },
+  {
+    id: 4,
+    name: "Sri manjunatha hydralic water sarwising center",
+    image: carService_img,
+    location: "Srinagar Colany,Karimnagar Road",
+    Discounts: {
+      d1: "Up to 150 off",
+    },
+    phone: "7799663223",
+  },
+  {
+    id: 5,
+    name: "Sridurga battery",
+    image: carService_img,
+    location: "chandrampet hanuman temple chowrasta,Karimnagar Road,Sircilla",
+    Discounts: {
+      d1: "35% Discoount on Amaron Battery(with exchange)Up to 20% off",
+      d2: "30% Discount on all Other Battery's(with Exchange)",
+    },
+    phone: "7799663223",
+  },
+  {
+    id: 6,
+    name: "engine carbon cleaning",
+    image: carService_img,
+    location: "soon",
+    Discounts: {
+      d1: " Up to 50% off",
+    },
+    phone: "7799663223",
   },
 ];
 
-const FoodCards = () => {
+const CarServiceCards = () => {
   // Animation variants
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -71,13 +101,13 @@ const FoodCards = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Food in Sircilla
+        Car and Bike Services in Sircilla
       </motion.h1>
-      <Note />
+      <Note/>
       <div className="space-y-6">
-        {restaurants.map((restaurant) => (
+        {CarServices.map((services) => (
           <motion.div
-            key={restaurant.id}
+            key={services.id}
             variants={cardVariants}
             whileHover={{
               scale: 1.03,
@@ -89,8 +119,8 @@ const FoodCards = () => {
             {/* Left Section */}
             <div className="flex items-center gap-5">
               <motion.img
-                src={restaurant.image}
-                alt={restaurant.name}
+                src={services.image}
+                alt={services.name}
                 className="w-24 h-24 object-cover rounded-md"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -98,15 +128,22 @@ const FoodCards = () => {
               />
               <div>
                 <h3 className="font-bold text-xl text-white">
-                  {restaurant.name}
+                  {services.name}
                 </h3>
-                <p className="text-gray-300 text-sm">{restaurant.address}</p>
-                <p className="text-l my-1">Discounts:</p>
-                <ul className="text-gray-400 text-xs mt-1 list-disc pl-4 space-y-1">
-                  {Object.values(restaurant.discounts).map((discount, index) => (
-                    <li key={index}>{discount}</li>
+                <p className="text-gray-300 text-sm">
+                  location : {services.location}
+                </p>
+                <p className="text-l font-bold">Discounts:</p>
+                <ul className="text-gray-400 text-xs mt-1 list-disc ml-4">
+                  {Object.values(services.Discounts).map((discount, idx) => (
+                    <li key={idx}>{discount}</li>
                   ))}
                 </ul>
+                {services.phone && (
+                  <p className="text-gray-400 text-xs mt-1">
+                    📞 {services.phone}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -125,4 +162,4 @@ const FoodCards = () => {
   );
 };
 
-export default FoodCards;
+export default CarServiceCards;

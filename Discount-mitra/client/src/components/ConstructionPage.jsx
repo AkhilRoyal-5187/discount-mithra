@@ -3,6 +3,7 @@ import React, { useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 // You might want a specific construction image, but 'gift' is used as a placeholder
 import construction from '../assests/constructions.png'; 
+import Note from './note';
 
 const constructionServices = [
     {
@@ -74,6 +75,7 @@ const ConstructionPage = () => {
             >
                 Construction Services in Sircilla
             </motion.h1>
+            <Note/>
 
             {/* Services Grid - Configured for responsiveness and consistent height */}
             {/* Using a grid to handle responsive columns and justify-items-center to center cards */}

@@ -1,48 +1,47 @@
-// src/components/FoodCards.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import restaurants_img from "../assests/Restaurants.jpg"
+import bank_img from "../assests/bank.jpg";
 import Note from "./note";
-
-const restaurants = [
+const Banking = [
   {
     id: 1,
-    name: "7 Arts Restaurant",
-    image: restaurants_img,
-    address: "Gandhi Nagar, Sircilla",
-
-    discounts: {
-      d1: " 10% on bill",
-      d2: " Party discounts",
-      d3: "Home deliveryHome delivery",
+    name: "Debit & Credits",
+    image: bank_img,
+    location: "Siricilla",
+    Discounts: {
+      d1: "0% processing fee",
+      d2: "₹1000 cashback",
+      d3: "refer and earn 500",
     },
+    phone: "7799663223",
   },
   {
     id: 2,
-    name: "Ice House",
-    image: restaurants_img,
-    address: "Sircilla",
-    discounts: {
-      d1: "10% on menu",
-      d2: "15% on 1000+Bill",
-     
-    }
+    name: "HDFC Credit Cards",
+    image: bank_img,
+    location: "Bus stand",
+    Discounts: {
+      d1: "10% EMI offers",
+      d2: " ₹1000 bonus",
+      d3: "15% lounge access",
+    },
+    phone: "7799663223",
   },
   {
     id: 3,
-    name: "Shankar Pani Puri",
-    image: restaurants_img,
-    address: "Shivalayam, Sircilla",
-     discounts: {
-      d1: "15% bill discount",
-       d2: "20% on 200 bill",
-      d3 : "35% Party catering"
-     
-    }
+    name: "Loan Services",
+    image: bank_img,
+    location: "discountmithra",
+    Discounts: {
+      d1: "5% processing fee off",
+      d2: "10% loan rate discount",
+      d3: "15% service offer",
+      },
+    phone: "7799663223",
   },
 ];
 
-const FoodCards = () => {
+const BankingCards = () => {
   // Animation variants
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -71,13 +70,13 @@ const FoodCards = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Food in Sircilla
-      </motion.h1>
-      <Note />
+        Banking in Sircilla
+          </motion.h1>
+          <Note/>
       <div className="space-y-6">
-        {restaurants.map((restaurant) => (
+        {Banking.map((banks) => (
           <motion.div
-            key={restaurant.id}
+            key={banks.id}
             variants={cardVariants}
             whileHover={{
               scale: 1.03,
@@ -89,24 +88,27 @@ const FoodCards = () => {
             {/* Left Section */}
             <div className="flex items-center gap-5">
               <motion.img
-                src={restaurant.image}
-                alt={restaurant.name}
+                src={banks.image}
+                alt={banks.name}
                 className="w-24 h-24 object-cover rounded-md"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               />
               <div>
-                <h3 className="font-bold text-xl text-white">
-                  {restaurant.name}
-                </h3>
-                <p className="text-gray-300 text-sm">{restaurant.address}</p>
-                <p className="text-l my-1">Discounts:</p>
-                <ul className="text-gray-400 text-xs mt-1 list-disc pl-4 space-y-1">
-                  {Object.values(restaurant.discounts).map((discount, index) => (
-                    <li key={index}>{discount}</li>
+                <h3 className="font-bold text-xl text-white">{banks.name}</h3>
+                <p className="text-gray-300 text-sm">
+                  location : {banks.location}
+                </p>
+                <p className="text-l font-bold">Discounts:</p>
+                <ul className="text-gray-400 text-xs mt-1 list-disc ml-4">
+                  {Object.values(banks.Discounts).map((discount, idx) => (
+                    <li key={idx}>{discount}</li>
                   ))}
                 </ul>
+                {banks.phone && (
+                  <p className="text-gray-400 text-xs mt-1">📞 {banks.phone}</p>
+                )}
               </div>
             </div>
 
@@ -125,4 +127,4 @@ const FoodCards = () => {
   );
 };
 
-export default FoodCards;
+export default BankingCards;

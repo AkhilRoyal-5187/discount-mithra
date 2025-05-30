@@ -2,6 +2,8 @@
 import React, { useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import laundryImage from '../assests/laundry.webp'; // Assuming you have a specific laundry image
+import Note from './note';
+
 
 // Data specifically for the Laundry Page
 const laundryServices = [
@@ -64,7 +66,7 @@ const LaundryPage = () => {
             >
                Laundry Services in Sircilla
             </motion.h1>
-
+            <Note />
             {/* Laundry Services Grid - Adjusted for responsiveness and consistent height */}
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center"> {/* Changed to 1 or 2 columns, centered items */}
                 {laundryServices.map((service) => (
@@ -115,8 +117,11 @@ const LaundryPage = () => {
                     </motion.div>
                 ))}
             </div>
+            
         </motion.div>
+       
     );
+     
 };
 
 export default LaundryPage;

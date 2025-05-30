@@ -2,6 +2,7 @@
 import React, { useLayoutEffect } from 'react'; // Import useLayoutEffect
 import { motion } from 'framer-motion';
 import tailor from '../assests/tailor.webp';
+import Note from './note';
 
 // Data specifically for the Tailor Page
 const tailorServices = [
@@ -53,6 +54,7 @@ const TailorPage = () => {
             >
                 Tailor Services in Sircilla
             </motion.h1>
+            <Note/>
 
             {/* Services Grid - Configured for responsiveness and consistent height */}
             {/* Added grid for responsive columns and justify-items-center for centering */}
