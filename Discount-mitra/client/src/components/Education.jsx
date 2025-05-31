@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import school_image from "../assests/school.jpg"
+import school_image from "../assests/school.jpg";
 import Note from "./note";
 const institutions = [
   {
@@ -92,8 +92,8 @@ const EducationCards = () => {
         transition={{ duration: 0.6 }}
       >
         Educational Institutions in Sircilla
-          </motion.h1>
-        <Note/>
+      </motion.h1>
+      <Note />
       <div className="space-y-6">
         {institutions.map((institution) => (
           <motion.div
@@ -104,7 +104,7 @@ const EducationCards = () => {
               boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
               transition: { duration: 0.3 },
             }}
-            className="flex items-center justify-between bg-gray-800/50 backdrop-blur-md border border-gray-700 p-6 rounded-xl shadow-lg h-40 overflow-hidden"
+            className="flex flex-col sm:flex-row gap-4 sm:items-center justify-between bg-gray-800/50 backdrop-blur-md border border-gray-700 p-6 rounded-xl shadow-lg"
           >
             {/* Left Section */}
             <div className="flex items-center gap-5">
@@ -120,7 +120,9 @@ const EducationCards = () => {
                 <h3 className="font-bold text-xl text-white">
                   {institution.name}
                 </h3>
-                <p className="text-gray-300 text-sm">location : {institution.location}</p>
+                <p className="text-gray-300 text-sm">
+                  location : {institution.location}
+                </p>
                 <p className="text-l font-bold">Discounts:</p>
                 <ul className="text-gray-400 text-xs mt-1 list-disc ml-4">
                   {Object.values(institution.Discounts).map((discount, idx) => (

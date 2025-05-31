@@ -1,19 +1,18 @@
-// src/components/HospitalCards.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import hospital from "../assests/doctor.jpg"
+import hospitalImage from "../assests/doctor.jpg"; // Assuming one image for now
 import Note from "./note";
 
 const hospitals = [
   {
     id: 1,
     name: "Lullu Children's Hospital",
-    image: hospital,
+    image: hospitalImage,
     address: "Gandhi Nagar, Sircilla",
     Discounts: {
       d1: "OP🩺 - FREE",
-      d2: "IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 40%",
-      d3: " LAB tests🔬(excluding outsourced) - 20%",
+      d2: "IP Billing🛏️ (excluding: consumables, pharmacy & surgicals) - 40%",
+      d3: "LAB tests🔬 (excluding outsourced) - 20%",
       d4: "Pharmacy - 10%",
     },
     phone: "7799663223",
@@ -21,98 +20,91 @@ const hospitals = [
   {
     id: 2,
     name: "Aditya Neuro & Ortho",
-    image: hospital,
+    image: hospitalImage,
     address: "Sircilla",
-    distance: "5.8 km",
     Discounts: {
       d1: "OP🩺 - 100 OFF",
       d2: "Pharmacy - 10%",
-      d3: "IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 20%",
-      d4: "LAB tests🔬(excluding outsourced) - 20%",
+      d3: "IP Billing🛏️ (excluding: consumables, pharmacy & surgicals) - 20%",
+      d4: "LAB tests🔬 (excluding outsourced) - 20%",
     },
     phone: "7799663223",
   },
-
   {
     id: 3,
     name: "Amrutha Hospital",
-    image: hospital,
+    image: hospitalImage,
     address: "Sircilla",
-    distance: "10.2 km",
     Discounts: {
       d1: "OP🩺 - 40%",
       d2: "Pharmacy - 0%",
-      d3: "IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 40%",
-      d4: "LAB tests🔬(excluding outsourced) - 40%",
+      d3: "IP Billing🛏️ (excluding: consumables, pharmacy & surgicals) - 40%",
+      d4: "LAB tests🔬 (excluding outsourced) - 40%",
     },
     phone: "7799663223",
   },
-
   {
     id: 4,
     name: "Chandana Chest Hospital",
-    image: hospital,
+    image: hospitalImage,
     address: "Sircilla",
-    distance: "11.2 km",
     Discounts: {
-      d1: " OP🩺 - 50%",
-      d2: " Pharmacy - 0%",
-      d3: "IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 25%",
-      d4: " LAB tests🔬(excluding outsourced) - 25%",
+      d1: "OP🩺 - 50%",
+      d2: "Pharmacy - 0%",
+      d3: "IP Billing🛏️ (excluding: consumables, pharmacy & surgicals) - 25%",
+      d4: "LAB tests🔬 (excluding outsourced) - 25%",
     },
     phone: "7799663223",
   },
-
   {
     id: 5,
     name: "Sri Siddi Vinayaka E.N.T Hospital",
-    image: hospital,
-    address: "3-2-84/1, Near Old Bus Stand,Sircilla, Rajanna Sircilla, 505301",
+    image: hospitalImage,
+    address: "3-2-84/1, Near Old Bus Stand, Sircilla, Rajanna Sircilla, 505301",
     Discounts: {
-      d1: "  OP🩺 - 100 OFF%",
-      d2: " Pharmacy - 15%",
-      d3: " IP Billing🛏️(excluding: consumables, pharmacy & surgicals) - 30%",
-      d4: " LAB tests🔬(excluding outsourced) - 30%",
+      d1: "OP🩺 - 100 OFF",
+      d2: "Pharmacy - 15%",
+      d3: "IP Billing🛏️ (excluding: consumables, pharmacy & surgicals) - 30%",
+      d4: "LAB tests🔬 (excluding outsourced) - 30%",
     },
     phone: "7799663223",
   },
   {
     id: 6,
     name: "Vihaana Multispeciality Dental Care",
-    image: hospital,
+    image: hospitalImage,
     address:
       "Karimnagar - Sircilla Rd, near OLD BUS STAND, Shanti Nagar, Sircilla, Telangana 505301",
     Discounts: {
       d1: "OP🩺 - FREE",
       d2: "X-ray🩻 - FREE",
-      d3: "Demtal Care - 25% to 30%",
-      d4: "Laser Flop Surgery(excluding outsourced) - 40%",
+      d3: "Dental Care - 25% to 30%",
+      d4: "Laser Flap Surgery (excluding outsourced) - 40%",
     },
     phone: "7799663223",
   },
   {
     id: 7,
-    name: "Vinayaka Dental Care -women docter",
-    image: hospital,
+    name: "Vinayaka Dental Care - Women Doctor",
+    image: hospitalImage,
     address:
-      "opposite Collage Ground, in manasa hospital, Sircilla, Telangana 505301",
+      "Opposite College Ground, in Manasa Hospital, Sircilla, Telangana 505301",
     Discounts: {
       d1: "OP🩺 - FREE",
       d2: "X-ray🩻 - FREE",
-      d3: "Demtal Care - 25% to 30%",
-      d4: "Laser Flop Surgery(excluding outsourced) - 40%",
+      d3: "Dental Care - 25% to 30%",
+      d4: "Laser Flap Surgery (excluding outsourced) - 40%",
     },
     phone: "7799663223",
   },
-
   {
     id: 8,
     name: "ShivaSai Optics",
-    image: hospital,
-    address: "opposite Old Bus Stand, Sircilla, Telangana 505301",
+    image: hospitalImage,
+    address: "Opposite Old Bus Stand, Sircilla, Telangana 505301",
     Discounts: {
-      d1: "eye check up - FREE",
-      d2: "Glasses - start Just -649",
+      d1: "Eye Checkup - FREE",
+      d2: "Glasses - Start at ₹649",
       d3: "Branded Glasses - 25% to 30%",
     },
     phone: "7799663223",
@@ -120,10 +112,10 @@ const hospitals = [
   {
     id: 9,
     name: "Laboratory",
-    image: hospital,
-    address: "soon",
+    image: hospitalImage,
+    address: "Coming Soon",
     Discounts: {
-      d1: "Blood Test: - 40%",
+      d1: "Blood Test - 40%",
       d2: "Special Tests - 25%",
       d3: "Packages - 40%",
     },
@@ -131,13 +123,13 @@ const hospitals = [
   },
   {
     id: 10,
-    name: "Laboratory",
-    image: hospital,
-    address: " Near Old Bus Stand,Sircilla, Rajanna Sircilla, 505301",
+    name: "Medical Store",
+    image: hospitalImage,
+    address: "Near Old Bus Stand, Sircilla, Rajanna Sircilla, 505301",
     Discounts: {
       d1: "Ethical Medicine - 23%",
-      d2: "Personal Care & Hygiene - 10 to 15%",
-      d3: "Medical Devices & Accessories - 20 to 50%",
+      d2: "Personal Care & Hygiene - 10% to 15%",
+      d3: "Medical Devices & Accessories - 20% to 50%",
     },
     phone: "7799663223",
   },
@@ -172,9 +164,9 @@ const HospitalCards = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Hospitals in Sircilla
+        Educational Institutions in Sircilla
       </motion.h1>
-      <Note/>
+      <Note />
       <div className="space-y-6">
         {hospitals.map((hospital) => (
           <motion.div
@@ -185,7 +177,7 @@ const HospitalCards = () => {
               boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
               transition: { duration: 0.3 },
             }}
-            className="flex items-center justify-between bg-gray-800/50 backdrop-blur-md border border-gray-700 p-6 rounded-xl shadow-lg h-40 overflow-hidden"
+            className="flex flex-col sm:flex-row gap-4 sm:items-center justify-between bg-gray-800/50 backdrop-blur-md border border-gray-700 p-6 rounded-xl shadow-lg"
           >
             {/* Left Section */}
             <div className="flex items-center gap-5">
@@ -201,18 +193,20 @@ const HospitalCards = () => {
                 <h3 className="font-bold text-xl text-white">
                   {hospital.name}
                 </h3>
-                <p className="text-gray-300 text-sm">{hospital.address}</p>
-                <p className="text-l my-1">Discounts:</p>
-                <ul className="text-gray-400 text-xs mt-1 list-disc pl-4 space-y-1">
-                  {Object.values(hospital.Discounts).map((discount, index) => (
-                    <li key={index}>{discount}</li>
-                  ))}
-                </ul><p className="text-l my-1">Discounts:</p>
-                <ul className="text-gray-400 text-xs mt-1 list-disc pl-4 space-y-1">
-                  {Object.values(hospital.Discounts).map((discount, index) => (
-                    <li key={index}>{discount}</li>
+                <p className="text-gray-300 text-sm">
+                  location : {hospital.location}
+                </p>
+                <p className="text-l font-bold">Discounts:</p>
+                <ul className="text-gray-400 text-xs mt-1 list-disc ml-4">
+                  {Object.values(hospital.Discounts).map((discount, idx) => (
+                    <li key={idx}>{discount}</li>
                   ))}
                 </ul>
+                {hospital.phone && (
+                  <p className="text-gray-400 text-xs mt-1">
+                    📞 {hospital.phone}
+                  </p>
+                )}
               </div>
             </div>
 

@@ -89,7 +89,7 @@ const TravelCards = () => {
               boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
               transition: { duration: 0.3 },
             }}
-            className="flex items-center justify-between bg-gray-800/50 backdrop-blur-md border border-gray-700 p-6 rounded-xl shadow-lg h-40 overflow-hidden"
+            className="flex flex-col sm:flex-row gap-4 sm:items-center justify-between bg-gray-800/50 backdrop-blur-md border border-gray-700 p-6 rounded-xl shadow-lg"
           >
             {/* Left Section */}
             <div className="flex items-center gap-5">
