@@ -24,6 +24,7 @@ import CarServiceCards from './components/Car_Bike';
 import BankingCards from './components/Banking.';
 import TravelCards from './components/Travels';
 import ShoppingCards from './components/Shopping';
+import WhatsAppButton from './components/WhatsAppButton.jsx';
 
 function App() {
   return (
@@ -64,6 +65,8 @@ function App() {
 
         {/* Footer */}
         <Footer />
+
+        <WhatsAppButton />
       </div>
     </Router>
   );
