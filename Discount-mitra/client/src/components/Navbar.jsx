@@ -51,14 +51,14 @@ const NavBar = () => {
               Download
             </NavLink>
             <NavLink
-              to="/signup"
+              to="/Login"
               className={({ isActive }) =>
                 isActive
                   ? 'text-blue-400 font-semibold'
                   : 'hover:text-blue-300 transition duration-200'
               }
             >
-              Sign Up
+              login
             </NavLink>
            
           </div>
@@ -110,7 +110,7 @@ const NavBar = () => {
               Download
             </NavLink>
             <NavLink
-              to="/signup"
+              to="/Login"
               className={({ isActive }) =>
                 isActive
                   ? 'text-blue-400 font-semibold'
@@ -118,7 +118,7 @@ const NavBar = () => {
               }
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Sign Up
+              login
             </NavLink>
             
           </div>

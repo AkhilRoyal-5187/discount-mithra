@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import doctorImage from '../assests/doctor1.png';
 
@@ -141,9 +141,14 @@ function Login() {
             >
               <p>
                 Don't have an account?{' '}
-                <Link to="/signup" className="text-blue-400 hover:text-blue-300 transition duration-200">
-                  Sign Up
-                </Link>
+                <a
+                  href={`https://wa.me/7799663223?text=${encodeURIComponent('Hello! I would like to know more about your services.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 transition duration-200"
+                >
+                  Connect Now
+                </a>
               </p>
             </motion.div>
           </motion.div>
