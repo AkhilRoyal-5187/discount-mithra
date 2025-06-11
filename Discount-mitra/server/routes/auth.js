@@ -73,14 +73,14 @@ try {
 // Add this login route after your signup route
 router.post('/login', async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { phoneNumber, password } = req.body;
 
-    // Find user by username
-    const user = await User.findOne({ username });
+    // Find user by phoneNumber
+    const user = await User.findOne({ phoneNumber });
     if (!user) {
       return res.status(401).json({ 
         success: false,
-        message: 'Invalid username or password' 
+        message: 'Invalid phone number or password' 
       });
     }
 
@@ -89,11 +89,10 @@ router.post('/login', async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ 
         success: false,
-        message: 'Invalid username or password' 
+        message: 'Invalid phone number or password' 
       });
     }
 
-    
     // Generate JWT token
     const token = jwt.sign(
       { userId: user._id }, 
@@ -107,7 +106,7 @@ router.post('/login', async (req, res) => {
       user: {
         id: user._id,
         name: user.name,
-        username: user.username
+        phoneNumber: user.phoneNumber
       }
     });
 
@@ -151,7 +150,6 @@ router.post('/signup', async (req, res) => {
     user = new User({ 
       name, 
       phoneNumber, 
-      username, 
       password: hashedPassword 
     });
 
@@ -165,7 +163,7 @@ router.post('/signup', async (req, res) => {
       console.log('Attempting to send SMS to:', formattedPhoneNumber);
       
       const message = await client.messages.create({
-        body: `Welcome to Discount-mitra, ${name}!\nYour login credentials:\nUsername: ${username}\nPassword: ${password}`,
+        body: `Welcome to Discount-mitra, ${name}!\nYour login credentials:\nPhone Number: ${phoneNumber}\nPassword: ${password}`,
         from: process.env.TWILIO_PHONE_NUMBER,
         to: formattedPhoneNumber
       });

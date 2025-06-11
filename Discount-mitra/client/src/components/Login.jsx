@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import doctorImage from '../assests/doctor1.png';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [PhoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function Login() {
     setError('');
     try {
       const res = await axios.post('http://localhost:8000/api/auth/login', {
-        username,
+        PhoneNumber,
         password,
       });
 
@@ -99,16 +99,16 @@ function Login() {
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
               <motion.div variants={inputVariants}>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-300">
-                  Username
+                <label htmlFor="PhoneNumber" className="block text-sm font-medium text-gray-300">
+                  Phone Number
                 </label>
                 <input
                   type="text"
-                  id="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  id="PhoneNumber"
+                  value={PhoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   className="mt-1 w-full p-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
-                  placeholder="Enter your username"
+                  placeholder="Enter your PhoneNumber"
                   required
                 />
               </motion.div>
