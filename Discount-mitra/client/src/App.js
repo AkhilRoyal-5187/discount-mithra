@@ -25,6 +25,9 @@ import BankingCards from './components/Banking.';
 import TravelCards from './components/Travels';
 import ShoppingCards from './components/Shopping';
 import WhatsAppButton from './components/WhatsAppButton.jsx';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -36,22 +39,23 @@ function App() {
         {/* Main Content Area - No White Space */}
         <main className="flex-grow w-full">
           <Routes>
+            {/* Public Routes */}
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/" element={<HomePage />} />
-            <Route path ='/services' element={<Services/>}/>
-            <Route path='/download' element={<Downloadcard/>}/>
-            <Route path ="/hospitals" element={<HospitalCards/>}/>
-            <Route path ='/food' element={<FoodCards/>}/>
-            <Route path ='/gift-articles' element={<GiftCards/>}/>
-            <Route path ='/events' element={<EventsPage/>}/>
-            <Route path ='/laundry' element={<LaundryPage/>}/> 
-            <Route path ='/tailors' element={<TailorPage/>}/>
-            <Route path ='/salons' element={<SalonPage/>}/>
-            <Route path ='/wine-shops' element={<WineShopPage/>}/>
-            <Route path ='/bars' element={<BarPage/>}/>
-            <Route path ='/construction' element={<ConstructionPage/>}/>
+            <Route path="/services" element={<Services/>}/>
+            <Route path="/download" element={<Downloadcard/>}/>
+            <Route path="/hospitals" element={<HospitalCards/>}/>
+            <Route path="/food" element={<FoodCards/>}/>
+            <Route path="/gift-articles" element={<GiftCards/>}/>
+            <Route path="/events" element={<EventsPage/>}/>
+            <Route path="/laundry" element={<LaundryPage/>}/> 
+            <Route path="/tailors" element={<TailorPage/>}/>
+            <Route path="/salons" element={<SalonPage/>}/>
+            <Route path="/wine-shops" element={<WineShopPage/>}/>
+            <Route path="/bars" element={<BarPage/>}/>
+            <Route path="/construction" element={<ConstructionPage/>}/>
             <Route path="/locations" element={<LocationsPage />} />
             <Route path="/education" element={<EducationCards />} />
             <Route path="/fresh" element={<FreshCards />} />
@@ -59,7 +63,17 @@ function App() {
             <Route path="/banking" element={<BankingCards />} />
             <Route path="/travels" element={<TravelCards />} />
             <Route path="/shopping" element={<ShoppingCards/>} />
-            {/* Add more routes as needed */}
+
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route 
+              path="/admin/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
         </main>
 

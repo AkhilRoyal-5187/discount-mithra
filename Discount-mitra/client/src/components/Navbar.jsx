@@ -1,7 +1,7 @@
 // src/components/NavBar.jsx
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUserShield } from 'react-icons/fa';
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,11 +12,11 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-  <Link to="/" className="text-2xl font-bold">
-    <span className="text-blue-400">discount</span>
-    <span className="text-white-500">mithrA</span>
-  </Link>
-</div>
+            <Link to="/" className="text-2xl font-bold">
+              <span className="text-blue-400">discount</span>
+              <span className="text-white-500">mithrA</span>
+            </Link>
+          </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
@@ -60,7 +60,13 @@ const NavBar = () => {
             >
               login
             </NavLink>
-           
+            <NavLink
+              to="/admin/login"
+              className="flex items-center space-x-1 bg-indigo-600 hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium transition duration-200"
+            >
+              <FaUserShield className="text-sm" />
+              <span>Admin</span>
+            </NavLink>
           </div>
 
           {/* Mobile Menu Button */}
@@ -120,7 +126,14 @@ const NavBar = () => {
             >
               login
             </NavLink>
-            
+            <NavLink
+              to="/admin/login"
+              className="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium transition duration-200 mt-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <FaUserShield className="text-sm" />
+              <span>Admin Login</span>
+            </NavLink>
           </div>
         </div>
       )}
