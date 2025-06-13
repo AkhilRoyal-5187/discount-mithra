@@ -25,18 +25,35 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/admin/login', formData);
+      console.log('Attempting login with username:', formData.username);
+      const response = await axios.post('http://localhost:8000/api/admin/login', formData);
       
+      if (!response.data.token) {
+        throw new Error('No token received from server');
+      }
+
+      console.log('Login successful, storing token');
       // Store the token in localStorage
       localStorage.setItem('adminToken', response.data.token);
       
       // Store admin info
       localStorage.setItem('adminInfo', JSON.stringify(response.data.admin));
       
+      console.log('Redirecting to dashboard');
       // Redirect to admin dashboard
       navigate('/admin/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      console.error('Login error:', err);
+      if (err.response) {
+        console.error('Error response:', err.response.data);
+        setError(err.response.data.message || 'Login failed. Please check your credentials.');
+      } else if (err.request) {
+        console.error('No response received:', err.request);
+        setError('No response from server. Please check your connection.');
+      } else {
+        console.error('Error setting up request:', err.message);
+        setError('An error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
