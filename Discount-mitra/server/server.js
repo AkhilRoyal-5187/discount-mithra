@@ -26,10 +26,13 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3001',
-    'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app',
-    'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app'
+    'https://discount-mithra-ni9z-5g3j0y2tz-akhilroyal-5187s-projects.vercel.app',
+    'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app',
+    'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Enable the express.json middleware to parse JSON request bodies

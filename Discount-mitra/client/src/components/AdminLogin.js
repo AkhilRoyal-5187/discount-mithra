@@ -29,12 +29,15 @@ const AdminLogin = () => {
         password
       });
 
-      const { token } = response.data;
-      sessionStorage.setItem('adminToken', token);
-      navigate('/admin/dashboard');
-    } catch (error) {
-      console.error('Login error:', error);
-      setError(error.response?.data?.message || 'Login failed');
+      if (response.data.token) {
+        sessionStorage.setItem('token', response.data.token);
+        navigate('/admin/dashboard');
+      } else {
+        setError('Invalid response from server');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError(err.response?.data?.message || 'Failed to login. Please try again.');
     } finally {
       setLoading(false);
     }
