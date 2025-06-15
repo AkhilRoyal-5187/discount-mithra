@@ -23,7 +23,14 @@ const app = express();
 // --- Middleware --- //
 
 // Enable Cross-Origin Resource Sharing (CORS)
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3001',
+    'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app',
+    'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app'
+  ],
+  credentials: true
+}));
 
 // Enable the express.json middleware to parse JSON request bodies
 app.use(express.json());

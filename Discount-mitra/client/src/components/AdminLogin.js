@@ -3,6 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
+// Configure axios defaults
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app'  // Production API URL
+  : 'http://localhost:8000';
+
+axios.defaults.baseURL = API_URL;
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +24,7 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/api/admin/login', {
+      const response = await axios.post('/api/admin/login', {
         username,
         password
       });
