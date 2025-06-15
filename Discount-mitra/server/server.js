@@ -27,6 +27,7 @@ app.use(cors({
   origin: function(origin, callback) {
     const allowedOrigins = [
       'http://localhost:3001',
+      'https://discount-mithra-ni9z.vercel.app',
       'https://discount-mithra-ni9z-5g3j0y2tz-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app',
