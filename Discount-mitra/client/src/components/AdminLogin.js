@@ -29,7 +29,7 @@ const AdminLogin = () => {
         password
       });
 
-      if (response.data.token) {
+      if (response.data && response.data.token) {
         sessionStorage.setItem('token', response.data.token);
         navigate('/admin/dashboard');
       } else {
@@ -37,7 +37,13 @@ const AdminLogin = () => {
       }
     } catch (err) {
       console.error('Login error:', err);
-      setError(err.response?.data?.message || 'Failed to login. Please try again.');
+      if (err.response) {
+        setError(err.response.data.message || 'Invalid username or password');
+      } else if (err.request) {
+        setError('Unable to connect to server. Please try again later.');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
