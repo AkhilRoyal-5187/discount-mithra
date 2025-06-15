@@ -24,24 +24,28 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/admin/login', {
+      const response = await axios.post(`${API_URL}/api/admin/login`, {
         username,
         password
       });
 
       if (response.data && response.data.token) {
-        sessionStorage.setItem('token', response.data.token);
-        navigate('/admin/dashboard');
+        localStorage.setItem('token', response.data.token);
+        navigate('/dashboard');
       } else {
         setError('Invalid response from server');
       }
     } catch (err) {
       console.error('Login error:', err);
       if (err.response) {
-        setError(err.response.data.message || 'Invalid username or password');
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setError(err.response.data.message || 'Login failed. Please check your credentials.');
       } else if (err.request) {
+        // The request was made but no response was received
         setError('Unable to connect to server. Please try again later.');
       } else {
+        // Something happened in setting up the request that triggered an Error
         setError('An unexpected error occurred. Please try again.');
       }
     } finally {

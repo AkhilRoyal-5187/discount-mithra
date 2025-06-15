@@ -30,7 +30,8 @@ app.use(cors({
       'https://discount-mithra-ni9z-5g3j0y2tz-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app',
-      'https://discount-mithra-ni9z-mb1cr3suu-akhilroyal-5187s-projects.vercel.app'
+      'https://discount-mithra-ni9z-mb1cr3suu-akhilroyal-5187s-projects.vercel.app',
+      'https://discount-mithra-ni9z-7fd7cij47-akhilroyal-5187s-projects.vercel.app'
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -108,12 +109,8 @@ app.get('/api/test', (req, res) => {
 
 // Centralized error handling for all routes
 app.use((err, req, res, next) => {
-  console.error('Caught an error:', err.stack); // Log the full stack trace for debugging
-  res.status(err.status || 500).json({
-    message: err.message || 'An internal server error occurred.',
-    // Only send error details in development mode for security
-    error: process.env.NODE_ENV === 'development' ? err : {} 
-  });
+  console.error('Error:', err);
+  res.status(500).json({ message: 'Internal server error' });
 });
 
 // --- 404 Not Found Handler --- //
@@ -137,6 +134,12 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+// Add a route to serve manifest.json
+app.get('/manifest.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.sendFile(path.join(__dirname, '../client/public/manifest.json'));
+});
 
 // --- Server Start --- //
 
