@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Configure axios defaults
 const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-production-api-url.com'  // Replace with your production API URL
+  ? 'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app'  // Updated production URL
   : 'http://localhost:8000';
 
 axios.defaults.baseURL = API_URL;
@@ -13,7 +13,7 @@ axios.defaults.headers.common['Content-Type'] = 'application/json';
 // Set up axios interceptor to handle token
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('adminToken');
+    const token = sessionStorage.getItem('adminToken');  // Changed from localStorage to sessionStorage
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -66,9 +66,7 @@ const AdminDashboard = () => {
     if (!token) return;
     
     try {
-      const response = await axios.get('http://localhost:8000/api/users', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await axios.get('/api/users');  // Using relative path with configured baseURL
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
