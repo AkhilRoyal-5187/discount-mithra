@@ -10,29 +10,51 @@ const prisma = new PrismaClient();
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
+    
+    // Find admin by username
     const admin = await prisma.admin.findUnique({
       where: { username }
     });
 
     if (!admin) {
-      return res.status(401).json({ message: 'Admin not found' });
+      return res.status(401).json({ 
+        success: false,
+        message: 'Invalid username or password' 
+      });
     }
 
+    // Compare password
     const validPassword = await bcrypt.compare(password, admin.password);
     if (!validPassword) {
-      return res.status(401).json({ message: 'Invalid password' });
+      return res.status(401).json({ 
+        success: false,
+        message: 'Invalid username or password' 
+      });
     }
 
+    // Generate JWT token
     const token = jwt.sign(
       { adminId: admin.id },
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
 
-    res.json({ token });
+    // Return success response with token and admin info
+    res.json({
+      success: true,
+      token,
+      admin: {
+        id: admin.id,
+        username: admin.username,
+        role: admin.role
+      }
+    });
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ 
+      success: false,
+      message: 'Server error' 
+    });
   }
 });
 

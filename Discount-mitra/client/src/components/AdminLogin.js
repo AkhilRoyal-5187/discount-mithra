@@ -25,13 +25,19 @@ const AdminLogin = () => {
 
     try {
       const response = await axios.post(`${API_URL}/api/admin/login`, {
-        username,
-        password
+        username: username.trim(),
+        password: password.trim()
       });
 
       if (response.data && response.data.token) {
+        // Store the token in localStorage
         localStorage.setItem('token', response.data.token);
-        navigate('/dashboard');
+        // Store admin info if available
+        if (response.data.admin) {
+          localStorage.setItem('adminInfo', JSON.stringify(response.data.admin));
+        }
+        // Redirect to admin dashboard
+        navigate('/admin/dashboard');
       } else {
         setError('Invalid response from server');
       }
@@ -40,7 +46,7 @@ const AdminLogin = () => {
       if (err.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        setError(err.response.data.message || 'Login failed. Please check your credentials.');
+        setError(err.response.data.message || 'Invalid username or password');
       } else if (err.request) {
         // The request was made but no response was received
         setError('Unable to connect to server. Please try again later.');
