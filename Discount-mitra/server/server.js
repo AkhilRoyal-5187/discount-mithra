@@ -30,14 +30,19 @@ app.use(express.json());
 
 // Enhanced logging middleware for incoming requests
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  // Log headers and body only if they exist to avoid 'undefined' logs
-  if (Object.keys(req.headers).length > 0) {
+  const timestamp = new Date().toISOString();
+  console.log(`${timestamp} - ${req.method} ${req.url}`);
+  
+  // Log headers for all requests
+  if (req.headers) {
     console.log('Headers:', JSON.stringify(req.headers, null, 2));
   }
-  if (Object.keys(req.body).length > 0) {
+  
+  // Log body only for non-GET requests
+  if (req.method !== 'GET' && req.body) {
     console.log('Body:', JSON.stringify(req.body, null, 2));
   }
+  
   next();
 });
 

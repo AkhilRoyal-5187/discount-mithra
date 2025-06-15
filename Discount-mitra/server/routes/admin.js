@@ -1,121 +1,77 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const Admin = require('../models/Admin');
+const { authenticateToken } = require('../middleware/auth');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-// Authentication middleware
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    console.log('No token provided in request');
-    return res.status(401).json({ message: 'Access denied. No token provided.' });
-  }
-
-  if (!process.env.JWT_SECRET) {
-    console.error('JWT_SECRET is not set in environment variables');
-    return res.status(500).json({ message: 'Server configuration error' });
-  }
-
-  try {
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = verified;
-    console.log('Token verified for admin ID:', req.user.adminId);
-    next();
-  } catch (error) {
-    console.error('Token verification error:', error);
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({ message: 'Token has expired' });
-    }
-    res.status(403).json({ message: 'Invalid token' });
-  }
-};
-
-// Admin login route
+// Admin login
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log('Login attempt for username:', username);
+    const admin = await prisma.admin.findUnique({
+      where: { username }
+    });
 
-    if (!process.env.JWT_SECRET) {
-      console.error('JWT_SECRET is not set in environment variables');
-      return res.status(500).json({ message: 'Server configuration error' });
-    }
-
-    // Find admin by username
-    const admin = await Admin.findOne({ username });
     if (!admin) {
-      console.log('Admin not found:', username);
-      return res.status(401).json({
-        success: false,
-        message: 'Invalid credentials'
-      });
+      return res.status(401).json({ message: 'Admin not found' });
     }
 
-    // Compare password
-    const isMatch = await admin.matchPassword(password);
-    if (!isMatch) {
-      console.log('Password mismatch for admin:', username);
-      return res.status(401).json({
-        success: false,
-        message: 'Invalid credentials'
-      });
+    const validPassword = await bcrypt.compare(password, admin.password);
+    if (!validPassword) {
+      return res.status(401).json({ message: 'Invalid password' });
     }
 
-    // Generate JWT token
     const token = jwt.sign(
-      { adminId: admin._id },
+      { adminId: admin.id },
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
 
-    console.log('Login successful for admin:', username);
-    res.status(200).json({
-      success: true,
-      token,
-      admin: {
-        id: admin._id,
-        username: admin.username,
-        name: admin.name,
-        role: admin.role
-      }
-    });
-
+    res.json({ token });
   } catch (error) {
-    console.error('Admin login error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Login failed',
-      error: error.message
-    });
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-// Admin logout route
-router.post('/logout', authenticateToken, (req, res) => {
+// Create admin (protected route - remove in production)
+router.post('/create', async (req, res) => {
   try {
-    console.log('Logout successful for admin ID:', req.user.adminId);
-    res.status(200).json({ message: 'Logged out successfully' });
+    const { username, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const admin = await prisma.admin.create({
+      data: {
+        username,
+        password: hashedPassword
+      }
+    });
+
+    res.status(201).json({ message: 'Admin created successfully' });
   } catch (error) {
-    console.error('Logout error:', error);
-    res.status(500).json({ message: 'Logout failed' });
+    console.error('Create admin error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
 // Get admin profile
 router.get('/profile', authenticateToken, async (req, res) => {
   try {
-    const admin = await Admin.findById(req.user.adminId).select('-password');
+    const admin = await prisma.admin.findUnique({
+      where: { id: req.user.adminId },
+      select: { id: true, username: true, createdAt: true }
+    });
+
     if (!admin) {
-      console.log('Admin not found for ID:', req.user.adminId);
       return res.status(404).json({ message: 'Admin not found' });
     }
-    console.log('Profile retrieved for admin:', admin.username);
+
     res.json(admin);
   } catch (error) {
-    console.error('Get profile error:', error);
-    res.status(500).json({ message: 'Failed to get profile' });
+    console.error('Profile error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

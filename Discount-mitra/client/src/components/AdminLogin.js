@@ -4,20 +4,11 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 
 const AdminLogin = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: ''
-  });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,35 +16,17 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      console.log('Attempting login with username:', formData.username);
-      const response = await axios.post('http://localhost:8000/api/admin/login', formData);
-      
-      if (!response.data.token) {
-        throw new Error('No token received from server');
-      }
+      const response = await axios.post('http://localhost:8000/api/admin/login', {
+        username,
+        password
+      });
 
-      console.log('Login successful, storing token');
-      // Store the token in localStorage
-      localStorage.setItem('adminToken', response.data.token);
-      
-      // Store admin info
-      localStorage.setItem('adminInfo', JSON.stringify(response.data.admin));
-      
-      console.log('Redirecting to dashboard');
-      // Redirect to admin dashboard
+      const { token } = response.data;
+      sessionStorage.setItem('adminToken', token);
       navigate('/admin/dashboard');
-    } catch (err) {
-      console.error('Login error:', err);
-      if (err.response) {
-        console.error('Error response:', err.response.data);
-        setError(err.response.data.message || 'Login failed. Please check your credentials.');
-      } else if (err.request) {
-        console.error('No response received:', err.request);
-        setError('No response from server. Please check your connection.');
-      } else {
-        console.error('Error setting up request:', err.message);
-        setError('An error occurred. Please try again.');
-      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError(error.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -151,8 +124,8 @@ const AdminLogin = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-700 text-white placeholder-gray-400 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
-                value={formData.username}
-                onChange={handleChange}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 whileFocus={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               />
@@ -168,8 +141,8 @@ const AdminLogin = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-700 text-white placeholder-gray-400 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 whileFocus={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               />

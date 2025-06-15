@@ -3,7 +3,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 // Configure axios defaults
-axios.defaults.baseURL = 'http://localhost:8000';
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://your-production-api-url.com'  // Replace with your production API URL
+  : 'http://localhost:8000';
+
+axios.defaults.baseURL = API_URL;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 // Set up axios interceptor to handle token
@@ -34,9 +38,10 @@ function debounce(func, wait) {
 }
 
 const AdminDashboard = () => {
-  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editedUser, setEditedUser] = useState(null);
@@ -54,80 +59,46 @@ const AdminDashboard = () => {
     phoneNumber: '',
     validTill: ''
   });
-
-  // Check authentication on component mount
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      console.log('No token found, redirecting to login');
-      navigate('/admin/login');
-      return;
-    }
-    console.log('Token found, proceeding with fetch');
-    fetchUsers();
-  }, [navigate]);
+  const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchUsers = useCallback(async () => {
+    if (!token) return;
+    
     try {
-      setIsLoadingUsers(true);
-      const token = localStorage.getItem('adminToken');
-      
-      if (!token) {
-        console.error('No admin token found');
-        navigate('/admin/login');
-        return;
-      }
-
-      console.log('Fetching users with token');
-      const response = await axios.get('/api/users');
-      
-      console.log('Users fetched successfully:', response.data.length);
+      const response = await axios.get('http://localhost:8000/api/users', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setUsers(response.data);
     } catch (error) {
-      console.error('Fetch users error:', error);
-      if (error.response) {
-        console.error('Error response:', error.response.data);
-        if (error.response.status === 401 || error.response.status === 403) {
-          console.log('Token invalid or expired, redirecting to login');
-          localStorage.removeItem('adminToken');
-          localStorage.removeItem('adminInfo');
-          navigate('/admin/login');
-        } else {
-          alert(`Failed to load users: ${error.response.data.message || 'Unknown error'}`);
-        }
-      } else if (error.request) {
-        console.error('No response received:', error.request);
-        alert('No response from server. Please check your connection.');
-      } else {
-        console.error('Error setting up request:', error.message);
-        alert('An error occurred while fetching users.');
+      console.error('Error fetching users:', error);
+      if (error.response?.status === 401) {
+        navigate('/admin/login');
       }
     } finally {
-      setIsLoadingUsers(false);
+      setLoading(false);
+    }
+  }, [token, navigate]);
+
+  useEffect(() => {
+    const storedToken = sessionStorage.getItem('adminToken');
+    if (storedToken) {
+      setToken(storedToken);
+    } else {
+      navigate('/admin/login');
     }
   }, [navigate]);
 
-  const handleLogout = async () => {
-    setIsLoggingOut(true);
-    try {
-      const token = localStorage.getItem('adminToken');
-      if (!token) {
-        console.log('No token found during logout');
-        navigate('/admin/login');
-        return;
-      }
-
-      await axios.post('/api/admin/logout');
-      console.log('Logout successful');
-    } catch (error) {
-      console.error('Error during logout:', error);
-    } finally {
-      // Always clear storage and redirect, even if the server request fails
-      localStorage.removeItem('adminToken');
-      localStorage.removeItem('adminInfo');
-      navigate('/admin/login');
-      setIsLoggingOut(false);
+  useEffect(() => {
+    if (token) {
+      fetchUsers();
     }
+  }, [token, fetchUsers]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('adminToken');
+    setToken(null);
+    navigate('/admin/login');
   };
 
   const handleEditClick = (user) => {
@@ -246,12 +217,12 @@ const AdminDashboard = () => {
           </button>
           <button
             onClick={fetchUsers}
-            disabled={isLoadingUsers}
+            disabled={isLoading}
             className={`px-4 py-2 rounded-xl ${
-              isLoadingUsers ? 'bg-gray-500 cursor-not-allowed' : 'bg-gray-700 hover:bg-gray-800'
+              isLoading ? 'bg-gray-500 cursor-not-allowed' : 'bg-gray-700 hover:bg-gray-800'
             }`}
           >
-            {isLoadingUsers ? 'Loading...' : 'Refresh Data'}
+            {isLoading ? 'Loading...' : 'Refresh Data'}
           </button>
         </div>
 
@@ -312,7 +283,7 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {isLoadingUsers ? (
+                {isLoading ? (
                   <tr>
                     <td colSpan="11" className="text-center py-4">
                       Loading...
