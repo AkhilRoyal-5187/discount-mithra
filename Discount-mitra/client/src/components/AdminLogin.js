@@ -24,17 +24,17 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${API_URL}/api/admin/login`, {
+      const response = await axios.post('/api/admin/login', {
         username: username.trim(),
         password: password.trim()
       });
 
       if (response.data && response.data.token) {
-        // Store the token in localStorage
-        localStorage.setItem('token', response.data.token);
+        // Store the token in sessionStorage
+        sessionStorage.setItem('adminToken', response.data.token);
         // Store admin info if available
         if (response.data.admin) {
-          localStorage.setItem('adminInfo', JSON.stringify(response.data.admin));
+          sessionStorage.setItem('adminInfo', JSON.stringify(response.data.admin));
         }
         // Redirect to admin dashboard
         navigate('/admin/dashboard');
