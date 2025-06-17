@@ -33,7 +33,8 @@ app.use(cors({
       'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-mb1cr3suu-akhilroyal-5187s-projects.vercel.app',
-      'https://discount-mithra-ni9z-7fd7cij47-akhilroyal-5187s-projects.vercel.app'
+      'https://discount-mithra-ni9z-7fd7cij47-akhilroyal-5187s-projects.vercel.app',
+      'https://discount-mithra-frountend.onrender.com'
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -137,7 +138,18 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Add a route to serve manifest.json
+// Serve static files with proper MIME types
+app.use(express.static(path.join(__dirname, '../client/build'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    } else if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+  }
+}));
+
+// Serve manifest.json with proper headers
 app.get('/manifest.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
