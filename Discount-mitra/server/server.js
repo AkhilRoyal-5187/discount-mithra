@@ -28,6 +28,7 @@ app.use(cors({
     const allowedOrigins = [
       'http://localhost:3001',
       'https://discount-mithra-ni9z.vercel.app',
+      'https://discount-mithra-ni9z-3hjbovrov-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-5g3j0y2tz-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app',
       'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app',
@@ -139,6 +140,7 @@ if (process.env.NODE_ENV === 'production') {
 // Add a route to serve manifest.json
 app.get('/manifest.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.sendFile(path.join(__dirname, '../client/public/manifest.json'));
 });
 
