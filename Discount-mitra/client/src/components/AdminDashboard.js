@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Configure axios defaults
 const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://discount-mithra-ni9z-r06vkqt6j-akhilroyal-5187s-projects.vercel.app'  // Updated production URL
+  ? 'https://discount-mithra-3.onrender.com'
   : 'http://localhost:8000';
 
 axios.defaults.baseURL = API_URL;
@@ -59,48 +59,28 @@ const AdminDashboard = () => {
     phoneNumber: '',
     validTill: ''
   });
-  const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   const fetchUsers = useCallback(async () => {
-    if (!token) return;
-    
     try {
-      const response = await axios.get('/api/users');  // Using relative path with configured baseURL
+      const response = await axios.get('/api/users');
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
-      if (error.response?.status === 401) {
-        navigate('/admin/login');
-      }
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
-  }, [token, navigate]);
+  }, []);
 
   useEffect(() => {
-    const storedToken = sessionStorage.getItem('adminToken');
-    if (storedToken) {
-      setToken(storedToken);
-    } else {
-      navigate('/admin/login');
-    }
-  }, [navigate]);
-
-  useEffect(() => {
-    if (token) {
-      fetchUsers();
-    }
-  }, [token, fetchUsers]);
+    fetchUsers();
+  }, [fetchUsers]);
 
   const handleLogout = () => {
-    sessionStorage.removeItem('adminToken');
-    setToken(null);
-    navigate('/admin/login');
+    navigate('/');
   };
 
   const handleEditClick = (user) => {
-    setEditingId(user._id);
+    setEditingId(user.id);
     setEditedUser({ ...user });
   };
 
@@ -117,7 +97,7 @@ const AdminDashboard = () => {
     try {
       setIsSaving(true);
       const response = await axios.put(`/api/users/${userId}`, editedUser);
-      setUsers(users.map(user => (user._id === userId ? response.data : user)));
+      setUsers(users.map(user => (user.id === userId ? response.data : user)));
       setEditingId(null);
       setEditedUser(null);
       alert('User updated successfully!');
@@ -134,7 +114,7 @@ const AdminDashboard = () => {
     try {
       setIsDeleting(userId);
       await axios.delete(`/api/users/${userId}`);
-      setUsers(users.filter(user => user._id !== userId));
+      setUsers(users.filter(user => user.id !== userId));
       alert('User deleted successfully!');
     } catch (error) {
       console.error('Delete error:', error);
@@ -295,9 +275,9 @@ const AdminDashboard = () => {
                   </tr>
                 ) : (
                   users.map((user) => (
-                    <tr key={user._id} className="bg-gray-900 border-b border-gray-700">
+                    <tr key={user.id} className="bg-gray-900 border-b border-gray-700">
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="text"
                             value={editedUser?.idNo || ''}
@@ -309,7 +289,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="text"
                             value={editedUser?.cardHolderName || ''}
@@ -321,7 +301,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="text"
                             value={editedUser?.familyName || ''}
@@ -333,7 +313,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="text"
                             value={editedUser?.family2 || ''}
@@ -345,7 +325,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="text"
                             value={editedUser?.family3 || ''}
@@ -357,7 +337,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="text"
                             value={editedUser?.family4 || ''}
@@ -369,7 +349,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="text"
                             value={editedUser?.family5 || ''}
@@ -381,7 +361,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="text"
                             value={editedUser?.phoneNumber || ''}
@@ -396,7 +376,7 @@ const AdminDashboard = () => {
                         {formatDate(user.createdAt)}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <input
                             type="date"
                             value={editedUser?.validTill ? new Date(editedUser.validTill).toISOString().split('T')[0] : ''}
@@ -408,10 +388,10 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user._id ? (
+                        {editingId === user.id ? (
                           <div className="flex gap-2">
                             <button
-                              onClick={() => handleUpdateUser(user._id)}
+                              onClick={() => handleUpdateUser(user.id)}
                               disabled={isSaving}
                               className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm disabled:opacity-50"
                             >
@@ -433,11 +413,11 @@ const AdminDashboard = () => {
                               Edit
                             </button>
                             <button
-                              onClick={() => handleDeleteUser(user._id)}
-                              disabled={isDeleting === user._id}
+                              onClick={() => handleDeleteUser(user.id)}
+                              disabled={isDeleting === user.id}
                               className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm disabled:opacity-50"
                             >
-                              {isDeleting === user._id ? '...' : 'Delete'}
+                              {isDeleting === user.id ? '...' : 'Delete'}
                             </button>
                           </div>
                         )}

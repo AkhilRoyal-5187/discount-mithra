@@ -15,7 +15,7 @@ function Signup() {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post('http://localhost:8000/api/auth/signup', {
+      const response = await axios.post('https://discount-mithra-3.onrender.com/api/auth/signup', {
         name,
         phoneNumber,
       });

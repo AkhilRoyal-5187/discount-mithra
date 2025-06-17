@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 // Configure axios defaults
 const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://discount-mithra-ni9z-o15rskvoo-akhilroyal-5187s-projects.vercel.app'  // Production API URL
+  ? 'https://discount-mithra-3.onrender.com'  // Production API URL
   : 'http://localhost:8000';
 
 axios.defaults.baseURL = API_URL;

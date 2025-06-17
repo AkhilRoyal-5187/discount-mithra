@@ -14,7 +14,7 @@ function Login() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('http://localhost:8000/api/auth/login', {
+      const res = await axios.post('https://discount-mithra-3.onrender.com/api/auth/login', {
         PhoneNumber,
         password,
       });

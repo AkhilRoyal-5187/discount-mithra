@@ -1,14 +1,7 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = sessionStorage.getItem('adminToken');
-
-  if (!isAuthenticated) {
-    // Redirect to login if not authenticated
-    return <Navigate to="/admin/login" replace />;
-  }
-
+  // Remove authentication check and directly return children
   return children;
 };
 

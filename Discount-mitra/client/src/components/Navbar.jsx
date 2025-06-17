@@ -61,7 +61,7 @@ const NavBar = () => {
               login
             </NavLink>
             <NavLink
-              to="/admin/login"
+              to="/admin/dashboard"
               className="flex items-center space-x-1 bg-indigo-600 hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium transition duration-200"
             >
               <FaUserShield className="text-sm" />
@@ -127,12 +127,12 @@ const NavBar = () => {
               login
             </NavLink>
             <NavLink
-              to="/admin/login"
+              to="/admin/dashboard"
               className="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium transition duration-200 mt-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <FaUserShield className="text-sm" />
-              <span>Admin Login</span>
+              <span>Admin</span>
             </NavLink>
           </div>
         </div>
