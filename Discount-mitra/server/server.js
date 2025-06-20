@@ -24,6 +24,7 @@ const app = express();
 
 // Enable Cross-Origin Resource Sharing (CORS)
 app.use(cors()); // Allow all origins
+app.options('*', cors()); // Handle preflight requests for all routes
 
 // Enable the express.json middleware to parse JSON request bodies
 app.use(express.json());

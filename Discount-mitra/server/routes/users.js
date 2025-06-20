@@ -4,7 +4,7 @@ const { authenticateToken } = require('../middleware/auth');
 const User = require('../models/User');
 
 // Get all users
-router.get('/', authenticateToken, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     console.log('Fetching all users...');
     const users = await User.find().sort({ createdAt: -1 });
@@ -20,7 +20,7 @@ router.get('/', authenticateToken, async (req, res) => {
 });
 
 // Create a new user
-router.post('/', authenticateToken, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const {
       idNo,
