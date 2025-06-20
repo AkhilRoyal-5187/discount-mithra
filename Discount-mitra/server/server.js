@@ -64,13 +64,11 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/discount-mi
 // Import and use your route files
 console.log('Importing routes...');
 try {
-  const adminRoutes = require('./routes/admin'); // Assuming your admin routes are in routes/admin.js
+  // const adminRoutes = require('./routes/admin'); // Temporarily commented out
   const userRoutes = require('./routes/users');   // Your user routes from routes/users.js (note the 'users' for consistency)
 
   console.log('Registering routes...');
-  // Use the admin routes for any request starting with /api/admin
-  app.use('/api/admin', adminRoutes);
-  // Use the user routes for any request starting with /api/users
+  // app.use('/api/admin', adminRoutes); // Temporarily commented out
   app.use('/api/users', userRoutes);
   console.log('Routes registered successfully.');
 } catch (error) {
