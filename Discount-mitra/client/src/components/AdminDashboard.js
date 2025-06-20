@@ -80,7 +80,7 @@ const AdminDashboard = () => {
   };
 
   const handleEditClick = (user) => {
-    setEditingId(user.id);
+    setEditingId(user._id);
     setEditedUser({ ...user });
   };
 
@@ -97,7 +97,7 @@ const AdminDashboard = () => {
     try {
       setIsSaving(true);
       const response = await axios.put(`/api/users/${userId}`, editedUser);
-      setUsers(users.map(user => (user.id === userId ? response.data : user)));
+      setUsers(users.map(user => (user._id === userId ? response.data : user)));
       setEditingId(null);
       setEditedUser(null);
       alert('User updated successfully!');
@@ -114,7 +114,7 @@ const AdminDashboard = () => {
     try {
       setIsDeleting(userId);
       await axios.delete(`/api/users/${userId}`);
-      setUsers(users.filter(user => user.id !== userId));
+      setUsers(users.filter(user => user._id !== userId));
       alert('User deleted successfully!');
     } catch (error) {
       console.error('Delete error:', error);
@@ -275,9 +275,9 @@ const AdminDashboard = () => {
                   </tr>
                 ) : (
                   users.map((user) => (
-                    <tr key={user.id} className="bg-gray-900 border-b border-gray-700">
+                    <tr key={user._id} className="bg-gray-900 border-b border-gray-700">
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="text"
                             value={editedUser?.idNo || ''}
@@ -289,7 +289,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="text"
                             value={editedUser?.cardHolderName || ''}
@@ -301,7 +301,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="text"
                             value={editedUser?.familyName || ''}
@@ -313,7 +313,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="text"
                             value={editedUser?.family2 || ''}
@@ -325,7 +325,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="text"
                             value={editedUser?.family3 || ''}
@@ -337,7 +337,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="text"
                             value={editedUser?.family4 || ''}
@@ -349,7 +349,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="text"
                             value={editedUser?.family5 || ''}
@@ -361,7 +361,7 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="text"
                             value={editedUser?.phoneNumber || ''}
@@ -376,7 +376,7 @@ const AdminDashboard = () => {
                         {formatDate(user.createdAt)}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <input
                             type="date"
                             value={editedUser?.validTill ? new Date(editedUser.validTill).toISOString().split('T')[0] : ''}
@@ -388,10 +388,10 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td className="px-6 py-3 text-white">
-                        {editingId === user.id ? (
+                        {editingId === user._id ? (
                           <div className="flex gap-2">
                             <button
-                              onClick={() => handleUpdateUser(user.id)}
+                              onClick={() => handleUpdateUser(user._id)}
                               disabled={isSaving}
                               className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm disabled:opacity-50"
                             >
@@ -413,11 +413,11 @@ const AdminDashboard = () => {
                               Edit
                             </button>
                             <button
-                              onClick={() => handleDeleteUser(user.id)}
-                              disabled={isDeleting === user.id}
+                              onClick={() => handleDeleteUser(user._id)}
+                              disabled={isDeleting === user._id}
                               className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm disabled:opacity-50"
                             >
-                              {isDeleting === user.id ? '...' : 'Delete'}
+                              {isDeleting === user._id ? '...' : 'Delete'}
                             </button>
                           </div>
                         )}
