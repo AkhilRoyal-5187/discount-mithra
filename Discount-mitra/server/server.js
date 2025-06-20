@@ -23,7 +23,7 @@ const app = express();
 // --- Middleware --- //
 
 // Enable Cross-Origin Resource Sharing (CORS)
-app.use(cors()); // Allow all origins for debugging
+app.use(cors()); // Allow all origins
 
 // Enable the express.json middleware to parse JSON request bodies
 app.use(express.json());
